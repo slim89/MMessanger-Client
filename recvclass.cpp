@@ -17,8 +17,7 @@ void RecvThread::run()
 }
 void RecvThread::readFromServer()
 {
-    cout<<"READ FROM"<<endl;
-   
+    cout<<"READ FROM"<<endl;   
     QByteArray str;
     str=socket->Read();
     QString tmp=str;
