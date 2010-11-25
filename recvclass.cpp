@@ -1,5 +1,6 @@
 #include "recvclass.h"
 #include <QString>
+#include <QByteArray>
 #include <string>
 #include <QTextCodec>
 using namespace std;
