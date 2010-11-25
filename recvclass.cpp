@@ -18,10 +18,11 @@ void RecvThread::run()
 void RecvThread::readFromServer()
 {
     cout<<"READ FROM"<<endl;
-    QString str;
+   
+    QByteArray str;
     str=socket->Read();
-
-    string buf=str.toStdString();
+    QString tmp=str;
+    string buf=tmp.toStdString();
     cout<<"STR"<<buf<<endl;
     Message* mes=new Message(buf);
     emit readyMessage(mes);
