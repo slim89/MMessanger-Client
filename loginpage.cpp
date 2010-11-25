@@ -1,8 +1,8 @@
 #include "loginpage.h"
-#include "sendthread.h"
+//#include "sendthread.h"
 
 
-extern SendThread* thread1;
+//extern SendThread* thread1;
 
  LoginPage::LoginPage()
 
@@ -62,10 +62,9 @@ extern SendThread* thread1;
              lay->addItem(Hlogin);
              lay->addItem(hEnter);
 
-     connect(enter,SIGNAL(clicked()),this,SLOT(login()));
-
+             connect(enter,SIGNAL(clicked()),this,SLOT(login()));
+             connect(but,SIGNAL(clicked()),SIGNAL(goHomePage()));
 }
-
 void  LoginPage::show_login(){
 
 
@@ -75,6 +74,5 @@ void LoginPage::login(){
         QString str ="";
         //отправляем сформированную строку-сообщение
         str ="#type/log#o/login#l/" + mylogin->text()+ "#p/" + password->text();
-        thread1->set(str);
-        thread1->start();
+        emit readySend(str);
 }

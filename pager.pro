@@ -18,11 +18,13 @@ SOURCES += main.cpp \
     registrationpage.cpp \
     clientsocket.cpp \
     loginpage.cpp \
-    sendthread.cpp
+    sendthread.cpp \
+    mymainwindow.cpp
 
 HEADERS += \
     homepage.h \
     registrationpage.h \
     clientsocket.h \
     loginpage.h \
-    sendthread.h
+    sendthread.h \
+    mymainwindow.h

@@ -11,8 +11,6 @@
 #include <QSizePolicy>
 
 
-
-
 class  LoginPage : public MApplicationPage
 {
     Q_OBJECT
@@ -25,10 +23,10 @@ private:
     MButton *enter,*but;
     MTextEdit* mylogin;
     MTextEdit* password;
-
 signals:
-
+    void goHomePage();
+    void readySend(QString);
 public slots:
-void login();
+    void login();
 };
 #endif // LOGIN_PAGE_H

@@ -30,4 +30,5 @@ bool SendThread::sendFromServer()
 }
 void  SendThread::set(QString str){
     mystr = str;
+     cout<<str.toStdString()<<endl;
 }

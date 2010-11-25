@@ -1,5 +1,6 @@
 #include "clientsocket.h"
-
+#include <iostream>
+using namespace std;
 ClientSocket::ClientSocket(QObject *parent) :
         QObject(parent)
 {
@@ -46,6 +47,8 @@ int ClientSocket::Write(QByteArray str)
 {
     if(IsSocketCorrect())
     {
+        cout<<"WRITE"<<str<<endl;
+
         sock.write(str);
         return 0;
     }
