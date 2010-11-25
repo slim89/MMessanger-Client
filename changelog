@@ -1,0 +1,3 @@
+create class SendThread
+create class ClientSocket
+develop Page: LoginPage, RegisterPage 
