@@ -25,6 +25,7 @@ public:
     RegistrationPage();
 signals:
     void readySend(QString);
+    void loadInfoPage(int);
 public slots:
     void tryToReg();
 };

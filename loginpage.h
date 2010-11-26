@@ -13,10 +13,10 @@
 
 class  LoginPage : public MApplicationPage
 {
-    Q_OBJECT
+
 public:
     LoginPage();
-    void show_login();
+    Q_OBJECT
 
 private:
     MLabel *lab,*line,*log_lab,*pass_lab;
@@ -26,7 +26,9 @@ private:
 signals:
     void goHomePage();
     void readySend(QString);
-public slots:
+    void loadInfoPage(int);
+    void exiting();
+private slots:
     void login();
 };
 #endif // LOGIN_PAGE_H

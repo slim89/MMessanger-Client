@@ -55,23 +55,53 @@ RegistrationPage::RegistrationPage()
 void RegistrationPage::tryToReg()
 {
     QString str1,str2;
+    QString badnick = "ser*ver";
+
     str1=repeat->text();
     str2=password->text();
+
     if(str1==str2)
     {
         log=login->text();
         pass=password->text();
+        if(log!="" && pass!="" )//если не пустые
+        {
+
+             if(log!=badnick &&log.length()<15 && log[0] != '#' && log.contains('*',Qt::CaseInsensitive) == false)
+                //имя не=ser*ver, не больше 15 символов и первый симовл не # ,не содержит * а пароль меньше 10 симолов
+            {
+                    if(pass.length()<10){
+                           str1="#type/log#o/registration#l/"+log+"#p/"+pass; //отправляем сформированную строку-сообщение
+                           emit readySend(str1);
+                    }
+                    else{
+                            emit loadInfoPage(2);//сообщение некорректный пароль
+                    }
+            }
+            else
+            {
+                 emit loadInfoPage(1);//сообщение некорректный логин
+            }
+
+
+        }
+        else
+        {
+
+            emit loadInfoPage(0);//сообшение не заполнили все поля
+        }
     }
     else
     {
         log="";
         pass="";
-        //say that error in password
+        emit loadInfoPage(3);
     }
-    str1="";
-    str1="#type/log#o/registration#l/"+log+"#p/"+pass;
+
+    badnick.clear();
+    str1.clear();
     login->clear();
     password->clear();
     repeat->clear();
-    emit readySend(str1);
+
 }
