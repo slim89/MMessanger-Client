@@ -19,7 +19,8 @@ SOURCES += main.cpp \
     sendthread.cpp \
     clientsocket.cpp \
     registrationpage.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    recvclass.cpp
 
 HEADERS += \
     homepage.h \
@@ -29,4 +30,5 @@ HEADERS += \
     mymainwindow.h \
     clientsocket.h \
     registrationpage.h \
-    mainwindow.h
+    mainwindow.h \
+    recvclass.h

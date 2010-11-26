@@ -1,11 +1,7 @@
 #include "recvclass.h"
-#include <QString>
-#include <QByteArray>
-#include <string>
-#include <QTextCodec>
 using namespace std;
 
-RecvThread::RecvThread(ClientSocket* sock,QObject *parent):
+RecvThread::RecvThread(ClientSocket* sock):
     QThread()
 {
     socket=sock;

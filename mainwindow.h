@@ -7,6 +7,7 @@
 #include "homepage.h"
 #include "loginpage.h"
 #include "registrationpage.h"
+#include "recvclass.h"
 
 class MainWindow : public MApplicationWindow
 {
@@ -20,6 +21,8 @@ private:
     LoginPage *page2;
     RegistrationPage *page3;
     SendThread* thread1;
+    RecvThread* thread2;
+
 
 public slots:
     void StartSendThread(QString);

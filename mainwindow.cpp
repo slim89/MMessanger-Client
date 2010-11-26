@@ -11,6 +11,7 @@ MainWindow::MainWindow():MApplicationWindow()
     sock= new ClientSocket();
     sock->ConnectToHost();
     thread1=new SendThread(sock);
+    thread2=new RecvThread(sock);
 
     page1->appear();
 
