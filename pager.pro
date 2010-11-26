@@ -29,7 +29,6 @@ HEADERS += \
     loginpage.h \
     sendthread.h \
     clientsocket.h \
-    registrationpage.h \
     mainwindow.h \
     recvclass.h \
     message.h
