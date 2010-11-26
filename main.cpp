@@ -4,7 +4,7 @@
 int main(int argc, char *argv[])
 {
     MApplication a(argc, argv);
-    MyMainWindow w;
+    MainWindow w;
     w.show();
     return a.exec();
 }

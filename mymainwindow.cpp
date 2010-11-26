@@ -2,7 +2,7 @@
 #include "homepage.h"
 #include "loginpage.h"
 
-MyMainWindow::MyMainWindow():MApplicationWindow()
+MainWindow::MainWindow():MApplicationWindow()
 {
 
     page1=new HomePage();
@@ -26,7 +26,7 @@ MyMainWindow::MyMainWindow():MApplicationWindow()
     QObject::connect(page2,SIGNAL(readySend(QString)),this,SLOT(StartSendThread(QString)));
 }
 
-void MyMainWindow::StartSendThread(QString buf)
+void MainWindow::StartSendThread(QString buf)
 {
     thread1->set(buf);
     thread1->start();

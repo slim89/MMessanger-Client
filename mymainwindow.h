@@ -8,7 +8,7 @@
 #include "loginpage.h"
 #include "registrationpage.h"
 
-class MyMainWindow : public MApplicationWindow
+class MainWindow : public MApplicationWindow
 {
     Q_OBJECT
 public:
