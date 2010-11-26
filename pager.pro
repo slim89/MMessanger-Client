@@ -20,15 +20,16 @@ SOURCES += main.cpp \
     clientsocket.cpp \
     registrationpage.cpp \
     mainwindow.cpp \
-    recvclass.cpp
+    recvclass.cpp \
+    message.cpp
 
 HEADERS += \
     homepage.h \
     registrationpage.h \
     loginpage.h \
     sendthread.h \
-    mymainwindow.h \
     clientsocket.h \
     registrationpage.h \
     mainwindow.h \
-    recvclass.h
+    recvclass.h \
+    message.h

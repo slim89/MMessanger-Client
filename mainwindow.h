@@ -13,7 +13,7 @@ class MainWindow : public MApplicationWindow
 {
     Q_OBJECT
 public:
-    MyMainWindow();
+    MainWindow();
 
 private:
     ClientSocket* sock;
