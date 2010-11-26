@@ -3,3 +3,5 @@ create class ClientSocket
 create class RecvThread
 add class Message
 develop Page: LoginPage, RegisterPage
+class MainWindow
+add InfoPage, add slots in MainWindow
