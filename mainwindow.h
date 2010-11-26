@@ -8,6 +8,7 @@
 #include "loginpage.h"
 #include "registrationpage.h"
 #include "recvclass.h"
+#include "message.h"
 
 class MainWindow : public MApplicationWindow
 {
@@ -26,6 +27,7 @@ private:
 
 public slots:
     void StartSendThread(QString);
+    void SelectOperation(Message*);
 };
 
 #endif // MAINWINDOW_H

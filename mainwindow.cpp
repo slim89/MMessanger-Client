@@ -12,6 +12,7 @@ MainWindow::MainWindow():MApplicationWindow()
     sock->ConnectToHost();
     thread1=new SendThread(sock);
     thread2=new RecvThread(sock);
+    thread2->start();
 
     page1->appear();
 
@@ -25,10 +26,16 @@ MainWindow::MainWindow():MApplicationWindow()
 
     QObject::connect(page2,SIGNAL(goHomePage()),page1,SLOT(appear()));
     QObject::connect(page2,SIGNAL(readySend(QString)),this,SLOT(StartSendThread(QString)));
+
+    QObject::connect(thread2,SIGNAL(readyMessage(Message*)),this,SLOT(SelectOperation(Message*)));
 }
 
 void MainWindow::StartSendThread(QString buf)
 {
     thread1->set(buf);
     thread1->start();
+}
+
+void MainWindow::SelectOperation(Message *mes)
+{
 }
