@@ -15,16 +15,17 @@ INSTALLS=target
 
 SOURCES += main.cpp \
     homepage.cpp \
-    registrationpage.cpp \
-    clientsocket.cpp \
     loginpage.cpp \
     sendthread.cpp \
-    mymainwindow.cpp
+    mymainwindow.cpp \
+    clientsocket.cpp \
+    registrationpage.cpp
 
 HEADERS += \
     homepage.h \
     registrationpage.h \
-    clientsocket.h \
     loginpage.h \
     sendthread.h \
-    mymainwindow.h
+    mymainwindow.h \
+    clientsocket.h \
+    registrationpage.h

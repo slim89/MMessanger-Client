@@ -12,9 +12,12 @@ class SendThread : public QThread
 public:
      ClientSocket*  mysock;
      QString mystr;
-     explicit SendThread(QObject *parent,ClientSocket* sock);
+     explicit SendThread(ClientSocket* sock);
      void set(QString str);
      void run();
-     bool sendFromServer();
+
+signals:
+     void success();
+     void fail();
 };
 #endif // SENDTREAD_H

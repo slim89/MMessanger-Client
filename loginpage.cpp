@@ -1,6 +1,4 @@
 #include "loginpage.h"
-//#include "sendthread.h"
-
 
 //extern SendThread* thread1;
 
@@ -65,11 +63,12 @@
              connect(enter,SIGNAL(clicked()),this,SLOT(login()));
              connect(but,SIGNAL(clicked()),SIGNAL(goHomePage()));
 }
-void  LoginPage::show_login(){
 
-
+void  LoginPage::show_login()
+{
 
 }
+
 void LoginPage::login(){
         QString str ="";
         //отправляем сформированную строку-сообщение
