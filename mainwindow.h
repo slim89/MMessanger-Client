@@ -7,8 +7,7 @@
 #include "homepage.h"
 #include "loginpage.h"
 #include "registrationpage.h"
-#include "recvclass.h"
-#include "message.h"
+#include "settingpage.h"
 
 class MainWindow : public MApplicationWindow
 {
@@ -16,18 +15,18 @@ class MainWindow : public MApplicationWindow
 public:
     MainWindow();
 
+
 private:
     ClientSocket* sock;
     HomePage *page1;
     LoginPage *page2;
     RegistrationPage *page3;
+    SettingPage *page4;
     SendThread* thread1;
-    RecvThread* thread2;
-
 
 public slots:
     void StartSendThread(QString);
-    void SelectOperation(Message*);
+    void ApplyNewSettings();
 };
 
 #endif // MAINWINDOW_H

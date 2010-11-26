@@ -20,6 +20,7 @@ signals:
     void goRegistrationPage();
     void goLoginPage();
     void goContactListPage();
+    void goSettingPage();
     void exiting();
 };
 

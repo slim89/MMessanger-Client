@@ -34,7 +34,7 @@ HomePage::HomePage()
     connect(login,SIGNAL(clicked()),SIGNAL(goLoginPage()));
     connect(con_list,SIGNAL(clicked()),SIGNAL(goContactListPage()));
     connect(registration,SIGNAL(clicked()),SIGNAL(goRegistrationPage()));
-    //connect(settings,SIGNAL(clicked()),SLOT());
+    connect(settings,SIGNAL(clicked()),SIGNAL(goSettingPage()));
     connect(exit,SIGNAL(clicked()),SIGNAL(exiting()));
 }
 

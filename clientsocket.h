@@ -18,6 +18,7 @@ public:
     bool IsSocketCorrect();
     QByteArray Read();
     int Write(QByteArray str);
+    void SetSettings(QString ip,int port);
 
 public slots:
 

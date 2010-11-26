@@ -20,8 +20,7 @@ SOURCES += main.cpp \
     clientsocket.cpp \
     registrationpage.cpp \
     mainwindow.cpp \
-    recvclass.cpp \
-    message.cpp
+    settingpage.cpp
 
 HEADERS += \
     homepage.h \
@@ -30,5 +29,4 @@ HEADERS += \
     sendthread.h \
     clientsocket.h \
     mainwindow.h \
-    recvclass.h \
-    message.h
+    settingpage.h

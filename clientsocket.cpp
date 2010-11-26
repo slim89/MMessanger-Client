@@ -25,6 +25,13 @@ bool ClientSocket::IsSocketCorrect()
     return sock.isValid();
 }
 
+void ClientSocket::SetSettings(QString ip, int p)
+{
+    IPaddr=ip;
+    port=p;
+    cout<<"Change Setting"<<IPaddr.toStdString()<<port<<endl;
+}
+
 QByteArray ClientSocket::Read()
 {
     QByteArray array;

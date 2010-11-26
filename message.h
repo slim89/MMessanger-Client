@@ -11,7 +11,7 @@
 #include <iostream>
 using namespace std;
 
-//class AQueue;
+class AQueue;
 class IMessage
 {
     public:
