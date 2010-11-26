@@ -1,4 +1,4 @@
-#include "mymainwindow.h"
+#include "mainwindow.h"
 #include "homepage.h"
 #include "loginpage.h"
 

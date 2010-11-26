@@ -1,5 +1,5 @@
 #include <MApplication>
-#include "mymainwindow.h"
+#include "mainwindow.h"
 
 int main(int argc, char *argv[])
 {
