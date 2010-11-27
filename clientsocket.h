@@ -19,6 +19,7 @@ public:
     QByteArray Read();
     int Write(QByteArray str);
     void SetSettings(QString ip,int port);
+    int bytesAvailable();
 
 public slots:
 

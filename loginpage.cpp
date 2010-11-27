@@ -78,7 +78,8 @@ void LoginPage::login(){
                 //имя не=ser*ver, не больше 15 символов и первый симовл не # ,не содержит * а пароль меньше 10 симолов
             {
                     if(password->text().length()<10){
-                            str ="#type/log#o/login#l/" + mylogin->text(); + "#p/" + password->text();; //отправляем сформированную строку-сообщение
+                            str ="#type/log#o/login#l/" + mylogin->text() + "#p/" + password->text(); //отправляем сформированную строку-сообщение
+                            emit readySend(str);
                     }
                     else{
                             emit loadInfoPage(2);//сообщение некорректный пароль

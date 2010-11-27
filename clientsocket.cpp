@@ -43,12 +43,6 @@ QByteArray ClientSocket::Read()
         i1++;
     }
     array=sock.read(i1+1);
-
-    if((tmp.count()-array.count())>0)
-        {
-            emit socketReadyRead();
-        }
-
     return array;
 }
 
@@ -63,4 +57,10 @@ int ClientSocket::Write(QByteArray str)
     {
         return 1;
     }
+}
+
+int ClientSocket::bytesAvailable()
+{
+    QByteArray tmp=sock.peek(1024);
+    return tmp.count();
 }

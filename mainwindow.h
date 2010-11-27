@@ -9,6 +9,8 @@
 #include "registrationpage.h"
 #include "settingpage.h"
 #include "infopage.h"
+#include "recvclass.h"
+
 class MainWindow : public MApplicationWindow
 {
     Q_OBJECT
@@ -24,6 +26,7 @@ private:
     SettingPage *page4;
     InfoPage *page5;
     SendThread* thread1;
+    RecvThread* thread2;
 
 public slots:
     void StartSendThread(QString);

@@ -3,6 +3,7 @@
 #include "loginpage.h"
 #include "settingpage.h"
 #include "mmessagebox.h"
+
 MainWindow::MainWindow():MApplicationWindow()
 {
 
@@ -15,6 +16,7 @@ MainWindow::MainWindow():MApplicationWindow()
     sock->ConnectToHost();
 
     thread1=new SendThread(sock);
+    thread2=new RecvThread(sock);
    // MMessageBox("Title","Hi",M::OkButton);
     page1->appear();
 

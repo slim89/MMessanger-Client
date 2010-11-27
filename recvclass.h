@@ -17,7 +17,7 @@ private:
     ClientSocket* socket;
     void readFromServer();
 public:
-    explicit RecvThread(ClientSocket* sock,QObject *parent);
+    explicit RecvThread(ClientSocket* sock);
     void run();
 signals:
     void readyMessage(Message* mes);
