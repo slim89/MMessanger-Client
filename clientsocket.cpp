@@ -61,6 +61,5 @@ int ClientSocket::Write(QByteArray str)
 
 int ClientSocket::bytesAvailable()
 {
-    QByteArray tmp=sock.peek(1024);
-    return tmp.count();
+    return sock.bytesAvailable();
 }
