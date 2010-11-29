@@ -13,6 +13,7 @@ class HomePage : public MApplicationPage
     MButton *registration;
     MButton *login;
     MButton *exit;
+    MButton *about;
     QGraphicsLinearLayout *VLay;
 public:
     HomePage();
@@ -21,6 +22,7 @@ signals:
     void goLoginPage();
     void goContactListPage();
     void goSettingPage();
+    void goInfoPage();
     void exiting();
 };
 

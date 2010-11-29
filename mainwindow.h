@@ -34,7 +34,6 @@ private:
 public slots:
     void StartSendThread(QString);
     void ApplyNewSettings();
-    void GoInfoPage(int);
     void GoRegistrationPage();
     void GoSettingPage();
     void GoLoginPage();
