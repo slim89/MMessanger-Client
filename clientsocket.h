@@ -10,6 +10,7 @@ class ClientSocket :  public QObject
     QTcpSocket sock;
     QString IPaddr;
     int port;
+    int status;
 
 public:
     ClientSocket(QObject *parent = 0);
@@ -20,6 +21,8 @@ public:
     int Write(QByteArray str);
     void SetSettings(QString ip,int port);
     int bytesAvailable();
+    void SetStatus(int i);
+    int Status();
 
 public slots:
 

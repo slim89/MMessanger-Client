@@ -8,6 +8,7 @@ ClientSocket::ClientSocket(QObject *parent) :
 {
     IPaddr="127.0.0.1";
     port=3425;
+    status=0;
     connect(&sock,SIGNAL(readyRead()),this,SIGNAL(socketReadyRead()),Qt::QueuedConnection);
 }
 
@@ -55,6 +56,8 @@ int ClientSocket::Write(QByteArray str)
     }
     else
     {
+        ConnectToHost();
+        sock.write(str);
         return 1;
     }
 }
@@ -62,4 +65,14 @@ int ClientSocket::Write(QByteArray str)
 int ClientSocket::bytesAvailable()
 {
     return sock.bytesAvailable();
+}
+
+int ClientSocket::Status()
+{
+    return status;
+}
+
+void ClientSocket::SetStatus(int i)
+{
+    status=i;
 }
