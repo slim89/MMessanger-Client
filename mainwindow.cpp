@@ -30,13 +30,14 @@ MainWindow::MainWindow():MApplicationWindow()
     QObject::connect(page1,SIGNAL(goSettingPage()),this,SLOT(GoSettingPage()));
     QObject::connect(page1,SIGNAL(goContactListPage()),this,SLOT(GoContactListPage()));
 
-    QObject::connect(page3,SIGNAL(readySend(QString)),this,SLOT(StartSendThread(QString)));
-    QObject::connect(page2,SIGNAL(readySend(QString)),this,SLOT(StartSendThread(QString)));
-
     QObject::connect(page2,SIGNAL(goHomePage()),this,SLOT(GoHomePage()));
-    QObject::connect(page4,SIGNAL(changeSettings()),this,SLOT(ApplyNewSettings()));
+    QObject::connect(page2,SIGNAL(readySend(QString)),this,SLOT(StartSendThread(QString)));
     QObject::connect(page2,SIGNAL(loadInfoPage(int)),this,SLOT(GoInfoPage(int)));
+
+    QObject::connect(page3,SIGNAL(readySend(QString)),this,SLOT(StartSendThread(QString)));
     QObject::connect(page3,SIGNAL(loadInfoPage(int)),this,SLOT(GoInfoPage(int)));
+
+    QObject::connect(page4,SIGNAL(changeSettings()),this,SLOT(ApplyNewSettings()));
 
     QObject::connect(thread2,SIGNAL(readyMessage(Message*)),this,SLOT(ListenServer(Message*)));
 }
@@ -49,17 +50,51 @@ void MainWindow::ListenServer(Message * mes)
         if ("good login-password"==mes->GetPart("m"))
         {
             MMessageBox* r=new MMessageBox("Title","Hi",M::OkButton);
-
             r->appear(this);
             page6->appear();
         }
+
         if ("good registration"==mes->GetPart("m"))
             page2->appear();
+
+        if(mes->GetPart("m")=="login is already used")
+        {
+            MMessageBox* r=new MMessageBox("Error!","This user online already",M::OkButton);
+            r->appear(this);
+        }
+
+        if(mes->GetPart("m")=="Error of password")
+        {
+            MMessageBox* r=new MMessageBox("Error!","Error of password",M::OkButton);
+            r->appear(this);
+        }
+
+        if(mes->GetPart("m")=="Error of login")
+        {
+            MMessageBox* r=new MMessageBox("Error!","This login doesn`t find in contacts base",M::OkButton);
+            r->appear(this);
+        }
+
+        if(mes->GetPart("m")=="Login already exist")
+        {
+            MMessageBox* r=new MMessageBox("Error!","Login already exist",M::OkButton);
+            r->appear(this);
+        }
     }
-   /* if ("connect"==mes->GetPart("o"))
+
+    else
     {
-        page6->Add();
-    }*/
+
+        /* if ("connect"==mes->GetPart("o"))
+        {
+            page6->Add();
+        }*/
+        /* if ("disconnect"==mes->GetPart("o"))
+        {
+            page6->Remove();
+        }*/
+    }
+
     delete mes;
 }
 void MainWindow::GoContactListPage()
@@ -86,7 +121,7 @@ void MainWindow::StartSendThread(QString buf)
     thread1->set(buf);
     thread1->start();
 }
-void  MainWindow::GoInfoPage(int number)
+void MainWindow::GoInfoPage(int number)
 {
 
     page5->setInfoMessage(number);

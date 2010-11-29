@@ -15,7 +15,7 @@
   <valuemap type="QVariantMap">
    <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">MeeGo</value>
    <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.Target.MeeGoDeviceTarget</value>
-   <value key="ProjectExplorer.Target.ActiveBuildConfiguration" type="int">1</value>
+   <value key="ProjectExplorer.Target.ActiveBuildConfiguration" type="int">0</value>
    <value key="ProjectExplorer.Target.ActiveRunConfiguration" type="int">0</value>
    <valuemap key="ProjectExplorer.Target.BuildConfiguration.0" type="QVariantMap">
     <valuemap key="ProjectExplorer.BuildConfiguration.BuildStep.0" type="QVariantMap">
@@ -54,8 +54,8 @@
     <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">Debug</value>
     <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration" type="int">2</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory" type="QString">/home/anton/pager-build-meego</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.QtVersionId" type="int">5</value>
+    <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory" type="QString">/home/dmitry/pager-build-meego</value>
+    <value key="Qt4ProjectManager.Qt4BuildConfiguration.QtVersionId" type="int">2</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.ToolChain" type="int">12</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild" type="bool">true</value>
    </valuemap>
@@ -77,7 +77,7 @@
      <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.MeeGoPackageCreationStep</value>
      <valuelist key="Qt4ProjectManager.BuildStep.MeeGoPackage.LocalFiles" type="QVariantList"/>
      <value key="Qt4ProjectManager.BuildStep.MeeGoPackage.Modified" type="bool">true</value>
-     <value key="Qt4ProjectManager.BuildStep.MeeGoPackage.RemoteExe" type="QString">/usr/local/bin/pager</value>
+     <value key="Qt4ProjectManager.BuildStep.MeeGoPackage.RemoteExe" type="QString"></value>
      <valuelist key="Qt4ProjectManager.BuildStep.MeeGoPackage.RemoteFiles" type="QVariantList"/>
     </valuemap>
     <value key="ProjectExplorer.BuildConfiguration.BuildStepsCount" type="int">3</value>
@@ -96,8 +96,8 @@
     <value key="ProjectExplorer.ProjectConfiguration.DisplayName" type="QString">Release</value>
     <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.Qt4BuildConfiguration</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildConfiguration" type="int">0</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory" type="QString">/home/anton/pager-build-meego</value>
-    <value key="Qt4ProjectManager.Qt4BuildConfiguration.QtVersionId" type="int">5</value>
+    <value key="Qt4ProjectManager.Qt4BuildConfiguration.BuildDirectory" type="QString">/home/dmitry/pager-build-meego</value>
+    <value key="Qt4ProjectManager.Qt4BuildConfiguration.QtVersionId" type="int">2</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.ToolChain" type="int">12</value>
     <value key="Qt4ProjectManager.Qt4BuildConfiguration.UseShadowBuild" type="bool">true</value>
    </valuemap>
@@ -108,7 +108,7 @@
     <value key="ProjectExplorer.ProjectConfiguration.Id" type="QString">Qt4ProjectManager.MeeGoRunConfiguration</value>
     <valuelist key="Qt4ProjectManager.MeeGoRunConfiguration.Arguments" type="QVariantList"/>
     <valuemap key="Qt4ProjectManager.MeeGoRunConfiguration.DebuggingHelpersLastDeployed" type="QVariantMap"/>
-    <value key="Qt4ProjectManager.MeeGoRunConfiguration.DeviceId" type="qulonglong">0</value>
+    <value key="Qt4ProjectManager.MeeGoRunConfiguration.DeviceId" type="qulonglong">4</value>
     <valuemap key="Qt4ProjectManager.MeeGoRunConfiguration.LastDeployed" type="QVariantMap"/>
    </valuemap>
    <value key="ProjectExplorer.Target.RunConfigurationCount" type="int">1</value>
