@@ -22,9 +22,9 @@ InfoPage::InfoPage()
     connect(okbut,SIGNAL(clicked()),this,SLOT(GoNext()));//не работает!!!!
 
 }
-void InfoPage::setInfoMessage(int number){
+void InfoPage::setInfoMessage(int number)
+{
     info_label->setText(list[number]);
-
 }
 void InfoPage::GoNext(){
     emit this->backButtonClicked();

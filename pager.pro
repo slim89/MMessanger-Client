@@ -22,7 +22,9 @@ SOURCES += main.cpp \
     mainwindow.cpp \
     settingpage.cpp \
     recvclass.cpp \
-    infopage.cpp
+    infopage.cpp \
+    message.cpp \
+    contactlistpage.cpp
 
 HEADERS += \
     homepage.h \
@@ -33,4 +35,9 @@ HEADERS += \
     mainwindow.h \
     settingpage.h \
     recvclass.h \
-    infopage.h
+    infopage.h \
+    message.h \
+    contactlistpage.h
+
+OTHER_FILES += \
+    changelog

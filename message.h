@@ -1,3 +1,5 @@
+#ifndef MESSAGE_H
+#define MESSAGE_H
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/select.h>
@@ -11,7 +13,6 @@
 #include <iostream>
 using namespace std;
 
-class AQueue;
 class IMessage
 {
     public:
@@ -41,3 +42,5 @@ class Message:public IMessage
         string Unparse();
         ~Message();
 };
+
+#endif // MESSAGE_H

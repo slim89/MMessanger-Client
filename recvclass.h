@@ -4,10 +4,7 @@
 #include <QObject>
 #include <QThread>
 
-#ifndef MESSAGE_H
-#define MESSAGE_H
 #include "message.h"
-#endif
 
 #include "clientsocket.h"
 class RecvThread : public QThread

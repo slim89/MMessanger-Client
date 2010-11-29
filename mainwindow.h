@@ -9,6 +9,8 @@
 #include "registrationpage.h"
 #include "settingpage.h"
 #include "infopage.h"
+#include "contactlistpage.h"
+#include "message.h"
 #include "recvclass.h"
 
 class MainWindow : public MApplicationWindow
@@ -25,6 +27,7 @@ private:
     RegistrationPage *page3;
     SettingPage *page4;
     InfoPage *page5;
+    ContactListPage* page6;
     SendThread* thread1;
     RecvThread* thread2;
 
@@ -36,7 +39,8 @@ public slots:
     void GoSettingPage();
     void GoLoginPage();
     void GoHomePage();
-
+    void GoContactListPage();
+    void ListenServer(Message* mes);
 
 };
 

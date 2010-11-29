@@ -27,6 +27,6 @@ void RecvThread::readFromServer()
     QString tmp=str;
     string buf=tmp.toStdString();
     cout<<"STR"<<buf<<endl;
-    //Message* mes=new Message(buf);
-    //emit readyMessage(mes);
+    Message* mes=new Message(buf);
+    emit readyMessage(mes);
 }
