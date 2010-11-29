@@ -1,26 +1,25 @@
 #ifndef INFOPAGE_H
 #define INFOPAGE_H
-#include <MButton>
 #include <MLabel>
 #include <QObject>
 #include <MApplicationPage>
-#include <QGraphicsLinearLayout>
+#include <QGraphicsGridLayout>
+#include <QGraphicsGridLayout>
+#include <MImageWidget>
 
 class InfoPage: public MApplicationPage
 {
     Q_OBJECT
-    QStringList list;
-    MButton *okbut;
-    MLabel *info_label;
-    QGraphicsLinearLayout *VLay;
+     MImageWidget* im;
+    MLabel *developers_name,   *project_name, *dev,*description1, *description2;
+   QGraphicsGridLayout *VLay;
 public:
     InfoPage();
-    void setInfoMessage(int);
 
 signals:
 
 public slots:
-    void GoNext();
+
 
 };
 

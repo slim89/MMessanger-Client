@@ -2,30 +2,39 @@
 
 InfoPage::InfoPage()
 {
-    this->setTitle("Attention!");
-    VLay=new QGraphicsLinearLayout(Qt::Vertical,this->centralWidget());
+   this->setTitle("About");
+   im=new MImageWidget(this->centralWidget());
+   QPixmap pp("./logo.png");
+   im->setPixmap(pp);
+   VLay=new QGraphicsGridLayout(this->centralWidget());
+   project_name = new MLabel("Meego-KVP-Client 1.0.0");
+   dev = new MLabel("Developers:");
+   developers_name = new MLabel("Dmitry Nikolaev, Anton Magaev, Andrey Gavrilin, Fomicheva Natalya");
+   description1 = new MLabel("The program is provided as is with no warranty of any kind");
+   description2 = new MLabel("");
+   int size =45;
 
-    okbut=new MButton("OK");
-    info_label = new MLabel("");
+   project_name->setMaximumHeight(size);
+   project_name->setMinimumHeight(size);
+   dev->setMaximumHeight(size);
+   dev->setMinimumHeight(size);
+   developers_name->setMaximumHeight(size);
+   developers_name->setMinimumHeight(size);
+   description1->setMaximumHeight(size);
+   description1->setMinimumHeight(size);
 
-    VLay->addItem(info_label);
-    VLay->addItem(okbut);
 
-    okbut->setMaximumSize(200,70);
+   description2->setMinimumHeight(90);
+   description2->setMaximumHeight(90);
+   im->setMaximumSize(125,130);
+   im->setMinimumSize(125,130);
 
-
-    //виды ошибок  и предупреждений
-    list << "You do not enter your username or password "
-    << "Incorrect login. Username can not contain the symbol \n '*' and start with '#', and be longer than 15 characters"
-    << "Incorrect password. The password can not be longer than \n 10 characters"
-   ;
-    connect(okbut,SIGNAL(clicked()),this,SLOT(GoNext()));//не работает!!!!
-
+    //VLay->addItem(im,1,1);
+    VLay->addItem(project_name,1,2);
+    VLay->addItem(description2,2,1);
+    VLay->addItem(description1,3,1,1,2);
+    VLay->addItem(dev,4,1);
+    VLay->addItem(developers_name,5,1,1,2);
+    VLay->setSpacing(-10);
 }
-void InfoPage::setInfoMessage(int number)
-{
-    info_label->setText(list[number]);
-}
-void InfoPage::GoNext(){
-    emit this->backButtonClicked();
-}
+
