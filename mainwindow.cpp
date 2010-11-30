@@ -13,7 +13,7 @@ MainWindow::MainWindow():MApplicationWindow()
     page3=new RegistrationPage();
     page4=new SettingPage();
     page5 =new InfoPage();
-    page6 = new ContactListPage();
+    page6 = new ContactlistPage();
     sock= new ClientSocket();
     sock->ConnectToHost();
 
@@ -80,14 +80,14 @@ void MainWindow::ListenServer(Message * mes)
     else
     {
 
-        /* if ("connect"==mes->GetPart("o"))
+         if ("connect"==mes->GetPart("o"))
         {
-            page6->Add();
-        }*/
-        /* if ("disconnect"==mes->GetPart("o"))
+            page6->Add(QString::fromStdString(mes->GetPart("s")),QString::fromStdString(mes->GetPart("o")));
+        }
+        if ("disconnect"==mes->GetPart("o"))
         {
-            page6->Remove();
-        }*/
+            page6->Remove(QString::fromStdString(mes->GetPart("s")));
+        }
     }
 
     delete mes;

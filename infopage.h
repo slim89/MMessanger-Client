@@ -6,7 +6,7 @@
 #include <QGraphicsGridLayout>
 #include <QGraphicsGridLayout>
 #include <MImageWidget>
-
+#include <mlabelmodel.h>
 class InfoPage: public MApplicationPage
 {
     Q_OBJECT

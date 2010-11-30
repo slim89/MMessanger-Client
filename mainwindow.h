@@ -27,7 +27,7 @@ private:
     RegistrationPage *page3;
     SettingPage *page4;
     InfoPage *page5;
-    ContactListPage* page6;
+    ContactlistPage* page6;
     SendThread* thread1;
     RecvThread* thread2;
 

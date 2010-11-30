@@ -24,7 +24,9 @@ SOURCES += main.cpp \
     recvclass.cpp \
     infopage.cpp \
     message.cpp \
-    contactlistpage.cpp
+    contactlistpage.cpp \
+    list_model.cpp \
+    contactspage.cpp
 
 HEADERS += \
     homepage.h \
@@ -37,7 +39,12 @@ HEADERS += \
     recvclass.h \
     infopage.h \
     message.h \
-    contactlistpage.h
+    contactlistpage.h \
+    contact_data.h \
+    MContentItemCreator.h \
+    list_model.h \
+    contactspage.h \
+    settingpage.h
 
 OTHER_FILES += \
     changelog

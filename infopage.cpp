@@ -10,12 +10,12 @@ InfoPage::InfoPage()
    project_name = new MLabel("Meego-KVP-Client 1.0.0");
    dev = new MLabel("Developers:");
    developers_name = new MLabel("Dmitry Nikolaev, Anton Magaev, Andrey Gavrilin, Fomicheva Natalya");
-   description1 = new MLabel("The program is provided as is with no warranty of any kind");
+   description1 = new MLabel("The program is provided AS IS with NO WARRANTY OF ANY KIND");
    description2 = new MLabel("");
    int size =45;
 
-   project_name->setMaximumHeight(size);
-   project_name->setMinimumHeight(size);
+   project_name->setMaximumHeight(55);
+   project_name->setMinimumHeight(55);
    dev->setMaximumHeight(size);
    dev->setMinimumHeight(size);
    developers_name->setMaximumHeight(size);
@@ -23,6 +23,19 @@ InfoPage::InfoPage()
    description1->setMaximumHeight(size);
    description1->setMinimumHeight(size);
 
+   //project_name->setObjectName("calculationLine");
+     // project_name->setAlignment(Qt::AlignRight);
+   // description1->setObjectName("calculationLine1");
+ //developers_name->setObjectName("calculationLine1");
+
+   MLabelModel *model1 = new MLabelModel();
+   model1->setText("Meego-KVP-Client 1.0.0");
+   QFont f("Nokia Sans Wide",45,80);
+   f.setPixelSize(80);
+   f.setBold(true);
+    model1->setFont(f);
+    model1->setColor(Qt::red);
+   project_name->setModel(model1);
 
    description2->setMinimumHeight(90);
    description2->setMaximumHeight(90);
