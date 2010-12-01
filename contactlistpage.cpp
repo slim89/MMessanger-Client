@@ -1,5 +1,3 @@
-#include "contactlistpage.h"
-
 #include <MList>
 #include <MContentItemCreator.h>
 #include <QGraphicsLinearLayout>
@@ -7,7 +5,7 @@
 #include <QDebug>
 #include <QMapIterator>
 
-
+#include "contactlistpage.h"
 #include "list_model.h"
 #include <contactspage.h>
 
@@ -19,7 +17,6 @@ ContactlistPage::ContactlistPage(QGraphicsItem *parent)
 
 ContactlistPage::~ContactlistPage()
 {
-    //qDeleteAll(contactsList);
 }
 
 void ContactlistPage::createContent()
@@ -52,7 +49,6 @@ void ContactlistPage::createContent()
     connect(clist, SIGNAL(itemClicked(QModelIndex)),
             this, SLOT(displayContact(QModelIndex)));
 
-
 }
 
 void ContactlistPage::displayContact(const QModelIndex &index)
@@ -63,9 +59,9 @@ void ContactlistPage::displayContact(const QModelIndex &index)
 
     emit goDialogPage(cname);
 
-    ContactsPage  * contactsPage = new ContactsPage(cname);
+    //ContactsPage  * contactsPage = new ContactsPage(cname);
 
-    contactsPage->appear(/*(MWindow*)scene(), MSceneWindow::DestroyWhenDismissed*/);
+    //contactsPage->appear(/*(MWindow*)scene(), MSceneWindow::DestroyWhenDismissed*/);
 
 }
 

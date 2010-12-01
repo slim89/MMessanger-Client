@@ -9,7 +9,6 @@ int ContactsListModel::rowCount(const QModelIndex &parent) const
     qDebug()<<">>ContactsListModel::rowCount : contactsCount="<< contactsCount;
     return contactsCount;
 
-    //return activeContacts.count();
 }
 
 QVariant ContactsListModel::data(const QModelIndex &index, int role) const
@@ -30,7 +29,7 @@ QVariant ContactsListModel::data(const QModelIndex &index, int role) const
         rowData << activeContacts.at(index.row()*2 + 1);
 
         qDebug()<<">>ContactsListModel::data : rowData="<< rowData;
-        //return QVariant(activeContacts.at(index.row()));
+
         return QVariant(rowData);
     }
     else

@@ -4,8 +4,6 @@
 #include <QModelIndex>
 #include <MList>
 #include <QHash>
-
-#include "contact_data.h"
 #include <contactspage.h>
 #include "list_model.h"
 
@@ -17,7 +15,7 @@ public:
     virtual ~ ContactlistPage();
 
     void Add(QString username, QString status);
-    void Remove(QString nick);
+    void Remove(QString username);
 
 signals:
     void goDialogPage(QString username);
@@ -28,7 +26,6 @@ protected:
 
 private slots:
     void displayContact(const QModelIndex &index);
-    //void updateContact(const int &action);
 
 private:
     QMap<QString, QString> contactsList; // Contacts list with status strings

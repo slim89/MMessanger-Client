@@ -14,9 +14,6 @@ protected:
     // From MApplicationPage
     virtual void createContent();
 
-private:
-    //const Contact *contact;
-
 };
 
 #endif // CONTACTSPAGE_H

@@ -1,12 +1,8 @@
 #ifndef MCONTENTITEMCREATOR_H
 #define MCONTENTITEMCREATOR_H
-#include <MApplication>
-#include <MApplicationWindow>
 #include <mcontentitem.h>
-#include <MApplicationPage>
-#include <mlist.h>
 #include <mabstractcellcreator.h>
-//#include <mwidgetcontroller.h>
+
 class MContentItemCreator : public MAbstractCellCreator<MContentItem>
  {
   public:
