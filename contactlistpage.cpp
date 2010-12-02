@@ -84,6 +84,17 @@ void ContactlistPage::Remove(QString username)
 
 }
 
+QList<QString> ContactlistPage::getUsernameList()
+{
+    return activeContacts;
+}
+
+QString ContactlistPage::getStatusByName(QString username)
+{
+    QMap<QString, QString>::const_iterator i = contactsList.find(username);
+
+    return i.value();
+}
 
 void ContactlistPage::UpdateContacts(QMap<QString, QString> contactsList)
 {

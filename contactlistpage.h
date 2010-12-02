@@ -17,6 +17,11 @@ public:
     void Add(QString username, QString status);
     void Remove(QString username);
 
+    QList<QString> getUsernameList();
+    QString getStatusByName(QString username);
+
+    //QMap<QString, QString> findContactByStatus(QString username);
+
 signals:
     void goDialogPage(QString username);
 
