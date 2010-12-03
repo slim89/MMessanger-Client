@@ -1,5 +1,4 @@
-This folder contains a file "Meego-KVP-Client-0.1.0.tar.gz" and 
-How install:
+INSTALL:
 
 a - use rpm package
 	Instal package:
@@ -7,36 +6,28 @@ a - use rpm package
 
 b - create rpm package
 
-1	You must create the directory if they are absent
-		/rpmbuild/BUILD
-		/rpmbuild/RPMS
-		/rpmbuild/SRPMS
-		/rpmbuild/SOURCES
-		/rpmbuild/SPECS
-2	Redefine the macro
-		echo '%_topdir /rpmbuild' > ~/.rpmmacros
+1	Download tar.gz file with this site
+
+2       Rename this archive "Meego-KVP-Client-0.1.0.tar.gz" and containing folder to "Meego-KVP-Client-0.1.0"
+		
+4	Redefine the macro
+		echo '%_topdir [path for build package]/rpmbuild' > ~/.rpmmacros
 
 3	Create rpm package
 		rpmbuild -tb [path to  "Meego-KVP-Client-0.1.0.tar.gz"]
-
+                The package will be created in [path for build package]/rpmbuild/RPMS/[arch]
+ 
 4	Instal package
 		zypper install [path to rpm package]
 
 
-How uninstall:
+UNINSTALL:
 	
 	zypper rm [name package]
 
-
-example:
-	mkdir /rpmbuild/
-	mkdir/rpmbuild/BUILD
-	mkdir/rpmbuild/RPMS
-	mkdir/rpmbuild/SRPMS
-	mkdir/rpmbuild/SOURCES
-	mkdir/rpmbuild/SPECS
+example:	
 	echo '%_topdir /rpmbuild' > ~/.rpmmacros
 	rpmbuild -tb /Meego-KVP-Client-0.1.0.tar.gz
-	zypper install/rpmbuild/RPMS/i586/Meego-KVP-Client-0.1.0.i586.rpm
+	zypper install /rpmbuild/RPMS/i586/Meego-KVP-Client-0.1.0.i586.rpm
 
 Attention to properly build the package from source Meego-KVP-Client-0.1.0.tar.gz must contain the correct .spec file !!!
