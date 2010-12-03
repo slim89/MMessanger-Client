@@ -1,8 +1,6 @@
 #include "clientsocket.h"
 #include <iostream>
-
 using namespace std;
-
 ClientSocket::ClientSocket(QObject *parent) :
         QObject(parent)
 {

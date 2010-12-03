@@ -1,17 +1,13 @@
 #ifndef CLIENTSOCKET_H
 #define CLIENTSOCKET_H
-
 #include <QtNetwork/QtNetwork>
-
 class ClientSocket :  public QObject
 {
     Q_OBJECT
-
     QTcpSocket sock;
     QString IPaddr;
     int port;
     int status;
-
 public:
     ClientSocket(QObject *parent = 0);
     ~ClientSocket();
@@ -23,9 +19,6 @@ public:
     int bytesAvailable();
     void SetStatus(int i);
     int Status();
-
-public slots:
-
 signals:
     void socketReadyRead();
 };

@@ -1,10 +1,4 @@
-#include <MButton>
-#include <MButtonGroup>
-#include <MLabel>
-#include <MSceneManager>
-#include <QGraphicsLinearLayout>
 #include <QDebug>
-
 #include "contactspage.h"
 
 ContactsPage::ContactsPage(QString cname, QGraphicsItem *parent)

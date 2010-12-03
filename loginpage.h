@@ -4,25 +4,25 @@
 #include <MButton>
 #include <MTextEdit>
 #include <MLayout>
-#include <QGraphicsLinearLayout>
 #include <MLabel>
 #include <MApplicationPage>
+#include <MApplicationWindow>
 #include <MButtonView>
-#include <QSizePolicy>
-
+#include <QGraphicsGridLayout>
 
 class  LoginPage : public MApplicationPage
 {
 
 public:
-    LoginPage();
+    LoginPage(MApplicationWindow*);
     Q_OBJECT
 
 private:
-    MLabel *lab,*line,*log_lab,*pass_lab;
-    MButton *enter,*but;
-    MTextEdit* mylogin;
-    MTextEdit* password;
+    MLabel *l_line,*l_login,*l_pass, *l_lab;
+    MTextEdit *t_login, *t_pass;
+    MButton *ok,*home;
+    QGraphicsGridLayout* VLay;
+    qreal maxWidth_label,maxWidth_edit,maxHeigh;
 signals:
     void goHomePage();
     void readySend(QString);

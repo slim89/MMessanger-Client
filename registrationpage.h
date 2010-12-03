@@ -1,28 +1,24 @@
 #ifndef REGISTRATIONPAGE_H
 #define REGISTRATIONPAGE_H
 #include <MApplicationPage>
-#include <QGraphicsLinearLayout>
+#include <MApplicationWindow>
+#include <QGraphicsGridLayout>
 #include <MButton>
 #include <QObject>
 #include <MLabel>
 #include <MTextEdit>
 #include <QString>
-
 class RegistrationPage : public MApplicationPage
 {
     Q_OBJECT
-    MLabel *h_line;
-    MLabel *en_log;
-    MLabel *en_pass;
-    MLabel *rep_pass;
-    MButton *reg;
-    MTextEdit *login;
-    MTextEdit *password;
-    MTextEdit *repeat;
-    QString pass;
-    QString log;
+    MLabel *l_line,*l_login,*l_pass,*l_repeat;
+    MTextEdit *t_login, *t_pass,*t_repeat;
+    MButton *ok;
+    QString pass, log;
+    QGraphicsGridLayout* VLay;
+    qreal maxWidth_label,maxWidth_edit,maxHeigh;
 public:
-    RegistrationPage();
+    RegistrationPage(MApplicationWindow*);
 signals:
     void readySend(QString);
     void loadInfoPage(int);

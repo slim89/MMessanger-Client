@@ -17,7 +17,6 @@ class MContentItemCreator : public MAbstractCellCreator<MContentItem>
           QStringList rowData = data.value<QStringList>();
           contentItem->setTitle(rowData[0]);
           contentItem->setSubtitle(rowData[1]);
-
       }
 
   };

@@ -1,106 +1,110 @@
 #include "loginpage.h"
-
-//extern SendThread* thread1;
-
- LoginPage::LoginPage()
+#include <MMessageBox>
+ LoginPage::LoginPage(MApplicationWindow* wind)
 
 {
-     this->setTitle("Autorization");
+            this->setTitle("Autorization");
+             VLay=new QGraphicsGridLayout(this->centralWidget());
 
-             QGraphicsLinearLayout *lay;
-             QGraphicsLinearLayout *hEnter,*home,*Hlogin,*VEdit,*VLabel,*last;
-             log_lab=new MLabel ("    Enter your login");
-             pass_lab=new MLabel("Enter your password");
+             l_line=new MLabel("<hr>");
+             l_login=new MLabel("Enter login:");
+             l_pass=new MLabel("Enter password:");
+             ok=new MButton("OK");
+             home=new MButton("Home");
+             l_lab=new MLabel("");
 
-             log_lab->setAlignment(Qt::AlignCenter);
-             pass_lab->setAlignment(Qt::AlignCenter );
+             t_login=new MTextEdit();
+             t_pass=new MTextEdit();
 
-             lay=new QGraphicsLinearLayout(Qt::Vertical,this->centralWidget());
-             home=new QGraphicsLinearLayout(Qt::Horizontal);
-             hEnter=new QGraphicsLinearLayout(Qt::Horizontal);
-             Hlogin=new QGraphicsLinearLayout(Qt::Horizontal);
-             VEdit=new QGraphicsLinearLayout(Qt::Vertical);
-             VLabel=new QGraphicsLinearLayout(Qt::Vertical);
-             last=new QGraphicsLinearLayout(Qt::Horizontal);
+             t_pass->setEchoMode(MTextEditModel::Password);
 
-              mylogin=new MTextEdit();
-              password=new MTextEdit();
 
-             password->setEchoMode(MTextEditModel::Password);
-             mylogin->setReadOnly(false);
-             password->setReadOnly(false);
+             maxWidth_label = wind->size().width()/4;
+             maxHeigh = wind->size().height()/5.7;
+             maxWidth_edit =  maxWidth_edit - maxWidth_label;
 
-             VEdit->addItem(mylogin);
-             VEdit->addItem(password);
 
-             VLabel->addItem(log_lab);
-             VLabel->addItem(pass_lab);
+             l_login->setMaximumWidth(maxWidth_label);
+             l_login->setMinimumWidth(maxWidth_label);
+             l_pass->setMaximumWidth(maxWidth_label);
+             l_pass->setMinimumWidth(maxWidth_label);
 
-             Hlogin->addItem(VLabel);
-             Hlogin->addItem(VEdit);
 
-             but=new MButton("Home");
-             lab=new MLabel("");
-             line=new MLabel("<hr>");
-             home->addItem(lab);
-             home->addItem(but);
-             home->setStretchFactor(but,Qt::StretchTile);
-             home->setSizePolicy(QSizePolicy::Minimum,QSizePolicy::Minimum);
-             VLabel->setSizePolicy(QSizePolicy::Minimum,QSizePolicy::Minimum);
+             ok->setMaximumWidth(maxWidth_label);
+             ok->setMinimumWidth(maxWidth_label);
 
-             //Button creating-------------------------------------------------
-             enter=new MButton("                    Login                   ");
-             hEnter->addItem(new MLabel(""));
-             hEnter->addItem(enter);
-             hEnter->setStretchFactor(enter,Qt::StretchTile);
-             but->setSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding);
-             lay->setStretchFactor(home,Qt::StretchTile);
-             lay->addItem(home);
-             lay->addItem(line);
-             lay->addItem(Hlogin);
-             lay->addItem(hEnter);
+             home->setMaximumWidth(maxWidth_label);
+             home->setMinimumWidth(maxWidth_label);
 
-             connect(enter,SIGNAL(clicked()),this,SLOT(login()));
-             connect(but,SIGNAL(clicked()),SIGNAL(goHomePage()));
+             l_login->setMaximumHeight(maxHeigh);
+             l_login->setMinimumHeight(maxHeigh);
+             l_pass->setMaximumHeight(maxHeigh);
+             l_pass->setMinimumHeight(maxHeigh);
+
+
+             t_login->setMaximumHeight(maxHeigh);
+             t_login->setMinimumHeight(maxHeigh);
+             t_pass->setMinimumHeight(maxHeigh);
+             t_pass->setMaximumHeight(maxHeigh);
+
+
+             ok->setMaximumHeight(maxHeigh);
+             ok->setMinimumHeight(maxHeigh);
+             home->setMaximumHeight(maxHeigh);
+             home->setMinimumHeight(maxHeigh);
+
+             l_line->setMinimumHeight(maxHeigh/2);
+             l_line->setMaximumHeight(maxHeigh/2);
+
+             VLay->addItem(home,1,2);
+             VLay->addItem(l_line,2,1,1,2);
+
+             VLay->addItem(l_login,3,1);
+             VLay->addItem(t_login,3,2);
+
+             VLay->addItem(l_pass,4,1);
+             VLay->addItem(t_pass,4,2);
+
+             VLay->addItem(ok,5,2);
+
+             VLay->setAlignment(ok,Qt::AlignRight);
+             VLay->setAlignment(home,Qt::AlignRight);
+             VLay->setSpacing(-3);
+             connect(ok,SIGNAL(clicked()),this,SLOT(login()));
+             connect(home,SIGNAL(clicked()),SIGNAL(goHomePage()));
 }
-
-
-
 void LoginPage::login(){
-
         QString badnick = "ser*ver";
         QString str ="";
-
-        if(mylogin->text()!="" && password->text()!="" )//если не пустые
+        QString log ="";
+        QString pass ="";
+        if(t_login->text()!="" && t_pass->text()!="" )//если не пустые
         {
-
-             if(mylogin->text()!=badnick && mylogin->text().length()<15 && mylogin->text()[0] != '#' && mylogin->text().contains('*',Qt::CaseInsensitive) == false)
+            log = t_login->text();
+            pass = t_pass->text();
+             if(log!=badnick && log.length()<15 && log[0] != '#' && log.contains('*',Qt::CaseInsensitive) == false)
                 //имя не=ser*ver, не больше 15 символов и первый симовл не # ,не содержит * а пароль меньше 10 симолов
             {
-                    if(password->text().length()<10){
-                            str ="#type/log#o/login#l/" + mylogin->text() + "#p/" + password->text(); //отправляем сформированную строку-сообщение
+                    if(pass.length()<10){
+                            str ="#type/log#o/login#l/" + log + "#p/" + pass; //отправляем сформированную строку-сообщение
                             emit readySend(str);
                     }
                     else{
-                            emit loadInfoPage(2);//сообщение некорректный пароль
-                    }
+                            MMessageBox* r=new MMessageBox("Error!","Incorrect password",M::OkButton);//сообщение некорректный пароль
+                            r->appear();
+                     }
             }
             else
             {
-                 emit loadInfoPage(1);//сообщение некорректный логин
+                 MMessageBox* r=new MMessageBox("Error!","Incorrect login",M::OkButton);//сообщение некорректный логин
+                 r->appear();
             }
-
 
         }
         else
         {
-
-            emit loadInfoPage(0);//сообшение не заполнили все поля
+            MMessageBox* r=new MMessageBox("Error!","Please fill in all fields",M::OkButton);//сообшение не заполнили все поля
+            r->appear();
         }
 
     }
-
-
-
-
-
