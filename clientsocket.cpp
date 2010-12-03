@@ -4,7 +4,8 @@ using namespace std;
 ClientSocket::ClientSocket(QObject *parent) :
         QObject(parent)
 {
-    IPaddr="127.0.0.1";
+    //IPaddr="127.0.0.1";
+    IPaddr="10.13.0.110";
     port=3425;
     status=0;
     connect(&sock,SIGNAL(readyRead()),this,SIGNAL(socketReadyRead()),Qt::QueuedConnection);
