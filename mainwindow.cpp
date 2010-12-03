@@ -15,7 +15,7 @@ MainWindow::MainWindow():MApplicationWindow()
     page5 =new InfoPage(this);
     page6 = new ContactlistPage();
     sock= new ClientSocket();
-    sock->ConnectToHost();
+    //sock->ConnectToHost();
     thread1=new SendThread(sock);
     thread2=new RecvThread(sock);
     page1->appear();
