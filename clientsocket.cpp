@@ -29,6 +29,8 @@ void ClientSocket::SetSettings(QString ip, int p)
 {
     IPaddr=ip;
     port=p;
+    sock.disconnectFromHost();
+    ConnectToHost();
     cout<<"Change Setting"<<IPaddr.toStdString()<<port<<endl;
 }
 
@@ -48,7 +50,9 @@ QByteArray ClientSocket::Read()
 
 int ClientSocket::Write(QByteArray str)
 {
-    if(IsSocketCorrect())
+    sock.write(str);
+    return 0;
+   /* if(IsSocketCorrect())
     {
         sock.write(str);
         return 0;
@@ -58,7 +62,7 @@ int ClientSocket::Write(QByteArray str)
         ConnectToHost();
         sock.write(str);
         return 1;
-    }
+    }*/
 }
 
 int ClientSocket::bytesAvailable()
