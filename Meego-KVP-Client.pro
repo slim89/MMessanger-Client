@@ -25,9 +25,9 @@ SOURCES += main.cpp \
     list_model.cpp \
     infopage.cpp \
     homepage.cpp \
-    contactspage.cpp \
     contactlistpage.cpp \
-    clientsocket.cpp
+    clientsocket.cpp \
+    dialogpage.cpp
 
 HEADERS += \
     settingpage.h \
@@ -41,10 +41,10 @@ HEADERS += \
     list_model.h \
     infopage.h \
     homepage.h \
-    contactspage.h \
     contactlistpage.h \
     contact_data.h \
-    clientsocket.h
+    clientsocket.h \
+    dialogpage.h
 
 OTHER_FILES += \
     style/background.svg \

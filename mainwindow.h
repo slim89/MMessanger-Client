@@ -12,6 +12,7 @@
 #include "contactlistpage.h"
 #include "message.h"
 #include "recvclass.h"
+#include "dialogpage.h"
 
 class MainWindow : public MApplicationWindow
 {
@@ -28,6 +29,7 @@ private:
     SettingPage *page4;
     InfoPage *page5;
     ContactlistPage* page6;
+    DialogPage* page7;
     SendThread* thread1;
     RecvThread* thread2;
 
@@ -38,6 +40,7 @@ public slots:
     void GoHomePage();
     void GoContactListPage();
     void ListenServer(Message* mes);
+    void GoDialogPage(QString);
 
 };
 

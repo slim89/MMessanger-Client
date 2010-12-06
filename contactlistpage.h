@@ -10,7 +10,6 @@
 #include <QDebug>
 #include <QMapIterator>
 #include "contact_data.h"
-#include <contactspage.h>
 #include "list_model.h"
 class ContactlistPage: public MApplicationPage
 {

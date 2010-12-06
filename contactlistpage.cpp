@@ -1,6 +1,5 @@
 #include "contactlistpage.h"
 #include "list_model.h"
-#include <contactspage.h>
 
 ContactlistPage::ContactlistPage(QGraphicsItem *parent)
     : MApplicationPage(parent)
@@ -40,9 +39,6 @@ void ContactlistPage::displayContact(const QModelIndex &index)
     QString cname = activeContacts[index.row()*2];
     qDebug() << ">>>MainPage::displayContact" << cname;
     emit goDialogPage(cname);
-    ContactsPage  * contactsPage = new ContactsPage(cname);
-    contactsPage->appear(/*(MWindow*)scene(), MSceneWindow::DestroyWhenDismissed*/);
-
 }
 
 void ContactlistPage::Add(QString username, QString status)

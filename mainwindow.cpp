@@ -14,6 +14,7 @@ MainWindow::MainWindow():MApplicationWindow()
     page4=new SettingPage(this);
     page5 =new InfoPage(this);
     page6 = new ContactlistPage();
+    page7=new DialogPage(this);
     sock= new ClientSocket();
     //sock->ConnectToHost();
     thread1=new SendThread(sock);
@@ -31,6 +32,7 @@ MainWindow::MainWindow():MApplicationWindow()
     QObject::connect(page3,SIGNAL(readySend(QString)),this,SLOT(StartSendThread(QString)));
     QObject::connect(page4,SIGNAL(changeSettings()),this,SLOT(ApplyNewSettings()));
     QObject::connect(thread2,SIGNAL(readyMessage(Message*)),this,SLOT(ListenServer(Message*)));
+    QObject::connect(page6,SIGNAL(goDialogPage(QString)),this,SLOT(GoDialogPage(QString)));
 }
 void MainWindow::ListenServer(Message * mes)
 {
@@ -113,4 +115,8 @@ void MainWindow::StartSendThread(QString buf)
 void MainWindow::GoLoginPage(){
 
     page2->appear();
+}
+void MainWindow::GoDialogPage(QString str)
+{
+    page7->appearPage(str);
 }
