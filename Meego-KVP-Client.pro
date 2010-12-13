@@ -27,7 +27,8 @@ SOURCES += main.cpp \
     homepage.cpp \
     contactlistpage.cpp \
     clientsocket.cpp \
-    dialogpage.cpp
+    dialogpage.cpp \
+    MessageAnimation.cpp
 
 HEADERS += \
     settingpage.h \
@@ -44,7 +45,8 @@ HEADERS += \
     contactlistpage.h \
     contact_data.h \
     clientsocket.h \
-    dialogpage.h
+    dialogpage.h \
+    MessageAnimation.h
 
 OTHER_FILES += \
     style/background.svg \
