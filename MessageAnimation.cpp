@@ -91,7 +91,7 @@ QString MessageAnimation::Frame()
         return MESS_FRAME_1;
 }
 
-QString MessageAnimation::Tumbnail( QString username, QString status )
+QString MessageAnimation::Thumbnail( QString username, QString status )
 {
     qDebug()<<">>>MainPage::GetTumbnailPath(QString username, QString status)";
 
