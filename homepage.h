@@ -1,10 +1,12 @@
 #ifndef HOMEPAGE_H
 #define HOMEPAGE_H
 #include <MApplicationPage>
-#include <QGraphicsLinearLayout>
+#include <MApplicationWindow>
+#include <QGraphicsGridLayout>
 #include <MButton>
+#include <MLabel>
 #include <QObject>
-
+#include <MImageWidget>
 class HomePage : public MApplicationPage
 {
     Q_OBJECT
@@ -14,9 +16,12 @@ class HomePage : public MApplicationPage
     MButton *login;
     MButton *exit;
     MButton *about;
-    QGraphicsLinearLayout *VLay;
+    MLabel *empty_label;
+    QGraphicsGridLayout *VLay;
+    MImageWidget* im;
+    qreal size_but, size;
 public:
-    HomePage();
+    HomePage(MApplicationWindow*);
 signals:
     void goRegistrationPage();
     void goLoginPage();

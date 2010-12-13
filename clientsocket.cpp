@@ -1,12 +1,11 @@
 #include "clientsocket.h"
 #include <iostream>
-
 using namespace std;
-
 ClientSocket::ClientSocket(QObject *parent) :
         QObject(parent)
 {
     IPaddr="127.0.0.1";
+    //IPaddr="10.13.0.110";
     port=3425;
     status=0;
     connect(&sock,SIGNAL(readyRead()),this,SIGNAL(socketReadyRead()),Qt::QueuedConnection);
@@ -30,6 +29,8 @@ void ClientSocket::SetSettings(QString ip, int p)
 {
     IPaddr=ip;
     port=p;
+    sock.disconnectFromHost();
+    ConnectToHost();
     cout<<"Change Setting"<<IPaddr.toStdString()<<port<<endl;
 }
 
@@ -49,7 +50,9 @@ QByteArray ClientSocket::Read()
 
 int ClientSocket::Write(QByteArray str)
 {
-    if(IsSocketCorrect())
+    sock.write(str);
+    return 0;
+   /* if(IsSocketCorrect())
     {
         sock.write(str);
         return 0;
@@ -59,7 +62,7 @@ int ClientSocket::Write(QByteArray str)
         ConnectToHost();
         sock.write(str);
         return 1;
-    }
+    }*/
 }
 
 int ClientSocket::bytesAvailable()

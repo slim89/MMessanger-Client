@@ -2,10 +2,7 @@
 #define SENDTREAD_H
 #include <QThread>
 #include <strings.h>
-
-
 class ClientSocket;
-
 class SendThread : public QThread
 {
     Q_OBJECT

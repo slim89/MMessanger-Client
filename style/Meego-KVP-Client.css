@@ -1,0 +1,11 @@
+MApplicationPageStyle {
+    background-color: blue;
+    background-image: music-catalogue-background-landscape;
+    background-opacity: 100;
+}
+
+MButtonStyle {
+    background-image: my-button-background $CORNER_MARGINS;
+
+}
+

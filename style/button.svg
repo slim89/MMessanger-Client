@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="meegotouch-button-layer" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;"
+	 xml:space="preserve">	
+	<g id="my-button-background">
+		<g>
+			<path style="fill:#000050;" d="M72,88c0,5.5-4.5,10-10,10H34c-5.5,0-10-4.5-10-10V62c0-5.5,4.5-10,10-10h28c5.5,0,10,4.5,10,10
+				V88z"/>
+		</g>
+		<g>
+			<path style="fill:#000000;" d="M72,86c0,5.5-4.5,10-10,10H34c-5.5,0-10-4.5-10-10V60c0-5.5,4.5-10,10-10h28c5.5,0,10,4.5,10,10
+				V86z"/>
+		</g>
+		<g>
+			<linearGradient id="SVGID_28_" gradientUnits="userSpaceOnUse" x1="48" y1="97" x2="48" y2="51">
+				<stop  offset="0" style="stop-color:#101010"/>
+				<stop  offset="1" style="stop-color:#FFFFFF"/>
+			</linearGradient>
+			<path style="fill:url(#SVGID_28_);" d="M72,87c0,5.5-4.5,10-10,10H34c-5.5,0-10-4.5-10-10V61c0-5.5,4.5-10,10-10h28
+				c5.5,0,10,4.5,10,10V87z"/>
+		</g>
+	</g>
+	
+</svg>

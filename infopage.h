@@ -7,20 +7,16 @@
 #include <QGraphicsGridLayout>
 #include <MImageWidget>
 #include <mlabelmodel.h>
+#include <MApplicationWindow>
 class InfoPage: public MApplicationPage
 {
-    Q_OBJECT
+     Q_OBJECT
      MImageWidget* im;
-    MLabel *developers_name,   *project_name, *dev,*description1, *description2;
-   QGraphicsGridLayout *VLay;
+     MLabel *developers_name,   *project_name, *dev,*description1, *description2;
+     QGraphicsGridLayout *VLay;
+     qreal maxHeigh;
 public:
-    InfoPage();
-
-signals:
-
-public slots:
-
-
+     InfoPage(MApplicationWindow*);
 };
 
 #endif // INFOPAGE_H

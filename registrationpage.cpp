@@ -1,55 +1,78 @@
 #include "registrationpage.h"
-
-RegistrationPage::RegistrationPage()
+#include "QDebug"
+#include <MMessageBox>
+RegistrationPage::RegistrationPage(MApplicationWindow* wind)
 {
     this->setTitle("Registration");
-
     log="";
     pass="";
+    VLay=new QGraphicsGridLayout(this->centralWidget());
 
-    QGraphicsLinearLayout *v=new QGraphicsLinearLayout(Qt::Vertical,this->centralWidget());
-    QGraphicsLinearLayout *h1=new QGraphicsLinearLayout(Qt::Horizontal);
-    QGraphicsLinearLayout *h2=new QGraphicsLinearLayout(Qt::Horizontal);
-    QGraphicsLinearLayout *h3=new QGraphicsLinearLayout(Qt::Horizontal);
+    l_line=new MLabel("<hr>");
+    l_login=new MLabel("Enter login:");
+    l_pass=new MLabel("Enter password:");
+    l_repeat=new MLabel("Repeat password:");
+    ok=new MButton("OK");
 
-    h_line=new MLabel("<hr>");
-    en_log=new MLabel("Enter login:");
-    en_pass=new MLabel("Enter password:");
-    rep_pass=new MLabel("Repeat password:");
+    t_login=new MTextEdit();
+    t_pass=new MTextEdit();
+    t_repeat=new MTextEdit();
 
-    reg=new MButton("Registration");
+    t_pass->setEchoMode(MTextEditModel::Password);
+    t_repeat->setEchoMode(MTextEditModel::Password);
 
-    login=new MTextEdit();
-    password=new MTextEdit();
-    repeat=new MTextEdit();
+    maxWidth_label = wind->size().width()/4;
+    maxHeigh = wind->size().height()/5.7;
+    maxWidth_edit =  maxWidth_edit - maxWidth_label;
 
-    password->setEchoMode(MTextEditModel::Password);
-    repeat->setEchoMode(MTextEditModel::Password);
 
-    h1->addItem(en_log);
-    h1->addItem(login);
-    h2->addItem(en_pass);
-    h2->addItem(password);
-    h3->addItem(rep_pass);
-    h3->addItem(repeat);
+    l_login->setMaximumWidth(maxWidth_label);
+    l_login->setMinimumWidth(maxWidth_label);
+    l_pass->setMaximumWidth(maxWidth_label);
+    l_pass->setMinimumWidth(maxWidth_label);
+    l_repeat->setMaximumWidth(maxWidth_label);
+    l_repeat->setMinimumWidth(maxWidth_label);
 
-    int maxWidth=230;
+    ok->setMaximumWidth(maxWidth_label);
+    ok->setMinimumWidth(maxWidth_label);
 
-    en_log->setMaximumWidth(maxWidth);
-    en_pass->setMaximumWidth(maxWidth);
-    rep_pass->setMaximumWidth(maxWidth);
-    en_log->setMinimumWidth(maxWidth);
-    en_pass->setMinimumWidth(maxWidth);
-    rep_pass->setMinimumWidth(maxWidth);
+    l_login->setMaximumHeight(maxHeigh);
+    l_login->setMinimumHeight(maxHeigh);
+    l_pass->setMaximumHeight(maxHeigh);
+    l_pass->setMinimumHeight(maxHeigh);
+    l_repeat->setMaximumHeight(maxHeigh);
+    l_repeat->setMinimumHeight(maxHeigh);
 
-    v->addItem(h1);
-    v->addItem(h2);
-    v->addItem(h3);
-    v->addItem(h_line);
-    v->addItem(reg);
-    v->addStretch();
+    t_login->setMaximumHeight(maxHeigh);
+    t_login->setMinimumHeight(maxHeigh);
+    t_pass->setMinimumHeight(maxHeigh);
+    t_pass->setMaximumHeight(maxHeigh);
+    t_repeat->setMinimumHeight(maxHeigh);
+    t_repeat->setMaximumHeight(maxHeigh);
 
-    connect(reg,SIGNAL(clicked()),this,SLOT(tryToReg()));
+    ok->setMaximumHeight(maxHeigh);
+    ok->setMinimumHeight(maxHeigh);
+
+    l_line->setMinimumHeight(maxHeigh/2);
+    l_line->setMaximumHeight(maxHeigh/2);
+
+
+    VLay->addItem(l_login,1,1);
+    VLay->addItem(t_login,1,2);
+
+    VLay->addItem(l_pass,2,1);
+    VLay->addItem(t_pass,2,2);
+
+    VLay->addItem(l_repeat,3,1);
+    VLay->addItem(t_repeat,3,2);
+
+    VLay->addItem(l_line,4,1,1,2);
+
+    VLay->addItem(ok,5,2);
+
+    VLay->setAlignment(ok,Qt::AlignRight);
+    VLay->setSpacing(-3);
+    connect(ok,SIGNAL(clicked()),this,SLOT(tryToReg()));
 }
 
 void RegistrationPage::tryToReg()
@@ -57,13 +80,13 @@ void RegistrationPage::tryToReg()
     QString str1,str2;
     QString badnick = "ser*ver";
 
-    str1=repeat->text();
-    str2=password->text();
+    str1=t_repeat->text();
+    str2=t_pass->text();
 
     if(str1==str2)
     {
-        log=login->text();
-        pass=password->text();
+        log=t_login->text();
+        pass=t_pass->text();
         if(log!="" && pass!="" )//если не пустые
         {
 
@@ -75,12 +98,15 @@ void RegistrationPage::tryToReg()
                            emit readySend(str1);
                     }
                     else{
-                            emit loadInfoPage(2);//сообщение некорректный пароль
+                            MMessageBox* r=new MMessageBox("Error!","Incorrect password",M::OkButton);//сообщение некорректный пароль
+
+                            r->appear();
                     }
             }
             else
             {
-                 emit loadInfoPage(1);//сообщение некорректный логин
+                 MMessageBox* r=new MMessageBox("Error!","Incorrect login",M::OkButton);//сообщение некорректный логин
+                 r->appear();
             }
 
 
@@ -88,8 +114,9 @@ void RegistrationPage::tryToReg()
         else
         {
 
-            emit loadInfoPage(0);//сообшение не заполнили все поля
-        }
+             MMessageBox* r=new MMessageBox("Error!","Please fill in all fields",M::OkButton); //сообшение не заполнили все поля
+            r->appear();
+         }
     }
     else
     {
@@ -100,8 +127,8 @@ void RegistrationPage::tryToReg()
 
     badnick.clear();
     str1.clear();
-    login->clear();
-    password->clear();
-    repeat->clear();
+    t_login->clear();
+    t_pass->clear();
+    t_repeat->clear();
 
 }

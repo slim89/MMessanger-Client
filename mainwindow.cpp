@@ -4,30 +4,27 @@
 #include "settingpage.h"
 #include <MMessageBox>
 #include "contactlistpage.h"
+#include <QDebug>
 
 MainWindow::MainWindow():MApplicationWindow()
 {
-
-    page1=new HomePage();
-    page2 =new LoginPage();
-    page3=new RegistrationPage();
-    page4=new SettingPage();
-    page5 =new InfoPage();
+    page1=new HomePage(this);
+    page2 =new LoginPage(this);
+    page3=new RegistrationPage(this);
+    page4=new SettingPage(this);
+    page5 =new InfoPage(this);
     page6 = new ContactlistPage();
+    page7=new DialogPage(this);
     sock= new ClientSocket();
-    sock->ConnectToHost();
-
+    //sock->ConnectToHost();
     thread1=new SendThread(sock);
     thread2=new RecvThread(sock);
-
     page1->appear();
-
-
     //переходы со страницы home на все остальные
     QObject::connect(page1,SIGNAL(goLoginPage()),this,SLOT(GoLoginPage()));
     QObject::connect(page1,SIGNAL(exiting()),this,SLOT(close()));
-    QObject::connect(page1,SIGNAL(goRegistrationPage()),this,SLOT(GoRegistrationPage()));
-    QObject::connect(page1,SIGNAL(goSettingPage()),this,SLOT(GoSettingPage()));
+    QObject::connect(page1,SIGNAL(goRegistrationPage()),page3,SLOT(appear()));
+    QObject::connect(page1,SIGNAL(goSettingPage()),page4,SLOT(appear()));
     QObject::connect(page1,SIGNAL(goContactListPage()),this,SLOT(GoContactListPage()));
     QObject::connect(page2,SIGNAL(goHomePage()),this,SLOT(GoHomePage()));
     QObject::connect(page1,SIGNAL(goInfoPage()),page5,SLOT(appear()));
@@ -35,8 +32,8 @@ MainWindow::MainWindow():MApplicationWindow()
     QObject::connect(page3,SIGNAL(readySend(QString)),this,SLOT(StartSendThread(QString)));
     QObject::connect(page4,SIGNAL(changeSettings()),this,SLOT(ApplyNewSettings()));
     QObject::connect(thread2,SIGNAL(readyMessage(Message*)),this,SLOT(ListenServer(Message*)));
+    QObject::connect(page6,SIGNAL(goDialogPage(QString)),this,SLOT(GoDialogPage(QString)));
 }
-
 void MainWindow::ListenServer(Message * mes)
 {
     mes->Parse();
@@ -44,7 +41,7 @@ void MainWindow::ListenServer(Message * mes)
    {
         if ("good login-password"==mes->GetPart("m"))
         {
-            MMessageBox* r=new MMessageBox("Title","Hi",M::OkButton);
+            MMessageBox* r=new MMessageBox("Title","Welcom",M::OkButton);
             r->appear(this);
             page6->appear();
         }
@@ -98,32 +95,28 @@ void MainWindow::GoContactListPage()
 }
 void MainWindow::GoHomePage()
 {
+    page1->disappear();
     page2->disappear();
     page3->disappear();
     page4->disappear();
     page5->disappear();
     page6->disappear();
     page1->appear();
-
 }
 void MainWindow::ApplyNewSettings()
 {
     sock->SetSettings(page4->GetIPAdrr(),page4->GetPort());
-
 }
 void MainWindow::StartSendThread(QString buf)
 {
     thread1->set(buf);
     thread1->start();
 }
-void MainWindow::GoRegistrationPage(){
-    page3->appear();
-}
-
-void MainWindow::GoSettingPage(){
-    page4->appear();
-}
 void MainWindow::GoLoginPage(){
 
     page2->appear();
+}
+void MainWindow::GoDialogPage(QString str)
+{
+    page7->appearPage(str);
 }

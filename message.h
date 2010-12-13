@@ -12,7 +12,6 @@
 #include <pthread.h>
 #include <iostream>
 using namespace std;
-
 class IMessage
 {
     public:
@@ -42,5 +41,4 @@ class Message:public IMessage
         string Unparse();
         ~Message();
 };
-
 #endif // MESSAGE_H
