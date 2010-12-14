@@ -52,4 +52,8 @@ OTHER_FILES += \
     style/background.svg \
     style/Meego-KVP-Client.css \
     style/button.svg \
-    style/logo.gif
+    style/logo.gif \
+    style/empty.svg \
+    style/green64x64.svg \
+    style/red64x64.svg \
+    style/message64x64.svg
