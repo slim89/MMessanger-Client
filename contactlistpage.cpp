@@ -34,7 +34,7 @@ void ContactlistPage::createContent()
 
     activeContacts << contactsList.keys("connect");
     activeContacts << contactsList.value("System Administraition");
-    activeContacts << messageAnimation->Tumbnail("System Administraition", "connect");
+    activeContacts << messageAnimation->Thumbnail("System Administraition", "connect");
 
     qDebug()<<">>>ContactlistPage::createContent() : activeContacts" << activeContacts;
 
@@ -126,7 +126,7 @@ void ContactlistPage::UpdateContacts(QMap<QString, QString> contactsList)
     QMap<QString, QString>::const_iterator i = contactsList.constBegin();
     while (i != contactsList.constEnd()) {
         activeContacts << i.key() << i.value();
-        activeContacts << messageAnimation->Tumbnail( i.key(), i.value() );
+        activeContacts << messageAnimation->Thumbnail( i.key(), i.value() );
          ++i;
     }
     cmodel->setActiveContcts(activeContacts);
