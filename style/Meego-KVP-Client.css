@@ -9,3 +9,100 @@ MButtonStyle {
 
 }
 
+MContentItemStyle {
+
+    background-tiles: my-meegotouch-list-background $CORNER_MARGINS;
+
+    background-image : my-meegotouch-list-background $CORNER_MARGINS;
+
+    background-color: $COLOR_BACKGROUND;
+    background-opacity: 1.0;
+
+    /* inherited from MWidgetStyle */
+    preferred-size: -1 $SIZE_ONE;
+    minimum-size: $SIZE_ONE $SIZE_ONE;
+    maximum-size: 100% $SIZE_FOUR;
+
+    title-object-name: "ContentItemTitle";
+    subtitle-object-name: "ContentItemSubtitle";
+    image-object-name: "ContentItemImage";
+    optional-image-object-name: "ContentItemOptionalImage";
+    small-item-object-name: "ContentItemSmallItem";
+}
+
+MContentItemStyle:selected {
+
+    background-tiles: my-meegotouch-list-background-selected $CORNER_MARGINS;
+
+    background-image : my-meegotouch-list-fullwidth-background-selected $CORNER_MARGINS;
+
+    background-color: $COLOR_INVERTED_FOREGROUND;
+    background-opacity: 1.0;
+}
+
+MContentItemStyle:pressed {
+
+    background-tiles: my-meegotouch-list-background-pressed $CORNER_MARGINS;
+
+    background-image : my-meegotouch-list-fullwidth-background-pressed $CORNER_MARGINS;
+
+    background-color: $COLOR_INVERTED_FOREGROUND;
+    background-opacity: 1.0;
+}
+
+#ContentItemImage {
+    /* inherited from MWidgetStyle */
+    preferred-size: 6.2283mm 6.2283mm;
+    minimum-size: 6.2283mm 6.2283mm;
+    maximum-size: 6.2283mm 6.2283mm;
+
+    margin-left:   $MARGIN_DOUBLE;
+    margin-right:  0;
+    margin-top:    $MARGIN_DOUBLE;
+    margin-bottom: $MARGIN_DOUBLE;
+}
+
+#ContentItemTitle {
+    font: $FONT_DEFAULT;
+    color: $COLOR_INVERTED_FOREGROUND;
+    /* inherited from MWidgetStyle */
+    margin-left:   $MARGIN_XLARGE;
+    margin-right:  $MARGIN_XLARGE;
+    margin-top:    $MARGIN_MEDIUM;
+    margin-bottom: 0;
+}
+
+#ContentItemSubtitle {
+    font: $FONT_SMALL;
+    color: $COLOR_INVERTED_SECONDARY_FOREGROUND;
+
+    /* inherited from MWidgetStyle */
+    margin-left:   $MARGIN_XLARGE;
+    margin-right:  $MARGIN_XLARGE;
+    margin-top:    $MARGIN_SMALL;
+    margin-bottom: 0;
+}
+
+#ContentItemOptionalImage {
+    /* inherited from MWidgetStyle */
+    preferred-size: 3.2mm 3.2mm;
+    minimum-size: 3.2mm 3.2mm;
+    maximum-size: 3.2mm 3.2mm;
+
+    margin-left:   0;
+    margin-right:  $MARGIN_DOUBLE;
+    margin-top:    $MARGIN_MEDIUM;
+    margin-bottom: $MARGIN_DOUBLE;
+}
+
+#ContentItemSmallItem {
+    /* inherited from MWidgetStyle */
+    preferred-size: 2.8mm 2.8mm;
+    minimum-size: 2.8mm 2.8mm;
+    maximum-size: 2.8mm 2.8mm;
+
+    margin-left:   0;
+    margin-right:  $MARGIN_DOUBLE;
+    margin-top:    $MARGIN_SMALL;
+    margin-bottom: 0;
+}

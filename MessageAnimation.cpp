@@ -1,11 +1,6 @@
 #include <QDebug>
 #include "MessageAnimation.h"
-
-#define MESS_FRAME_0 "usr/share/Meego-KVP-Client/style/message64x64.svg"
-#define MESS_FRAME_1 "usr/share/Meego-KVP-Client/style/empty.svg"
-
-#define GREEN "usr/share/Meego-KVP-Client/style/green64x64.svg"
-#define RED "usr/share/Meego-KVP-Client/style/red64x64.svg"
+#include "config.h"
 
 MessageAnimation::MessageAnimation()
 {
@@ -40,10 +35,9 @@ void MessageAnimation::Stop(QString username)
         timer->stop();
 
     if(hasMessage(username))
-    {
         users.removeAll(username);
-        QTimer::singleShot(4000, this, SLOT(startUnread()));
-    }
+
+    QTimer::singleShot(4000, this, SLOT(startUnread()));
 
 }
 
@@ -85,15 +79,21 @@ void MessageAnimation::RemoveUser(QString username)
 
 QString MessageAnimation::Frame()
 {
+    QString message_frame( KVP_THEMES_SVG_DIR );
+
+    message_frame += KVP_THEMES_MESS_ICON;
+
     if(frame == 0)
-        return MESS_FRAME_0;
+        return message_frame;
     else
-        return MESS_FRAME_1;
+        return "";
 }
 
 QString MessageAnimation::Thumbnail( QString username, QString status )
 {
-    qDebug()<<">>>MainPage::GetTumbnailPath(QString username, QString status)";
+    qDebug()<<">>>MessageAnimation::Thumbnail(QString username, QString status)";
+
+    QString status_icon( KVP_THEMES_SVG_DIR );
 
     if (hasMessage(username))
     {
@@ -102,11 +102,13 @@ QString MessageAnimation::Thumbnail( QString username, QString status )
 
     if (status == "connect")
     {
-        return GREEN;
+        status_icon += KVP_THEMES_ON_ICON;
     }
     else
     {
-        return RED;
+        status_icon +=  KVP_THEMES_OFF_ICON;
     }
+
+    return status_icon;
 }
 

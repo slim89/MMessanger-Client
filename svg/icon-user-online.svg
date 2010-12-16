@@ -109,11 +109,11 @@
     <linearGradient
        id="linearGradient3632">
       <stop
-         style="stop-color:#ff0031;stop-opacity:1;"
+         style="stop-color:#00ff35;stop-opacity:1;"
          offset="0"
          id="stop3634" />
       <stop
-         style="stop-color:#ff2318;stop-opacity:0.47058824;"
+         style="stop-color:#18ff69;stop-opacity:0.47058824;"
          offset="1"
          id="stop3636" />
     </linearGradient>
@@ -167,7 +167,7 @@
     <path
        sodipodi:type="arc"
        style="fill:url(#radialGradient6361);fill-opacity:1;stroke:none"
-       id="path2856"
+       id="icon-user-online"
        sodipodi:cx="16.967615"
        sodipodi:cy="15.880765"
        sodipodi:rx="15.449461"

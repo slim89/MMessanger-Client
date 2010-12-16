@@ -1,4 +1,5 @@
 #include "homepage.h"
+#include "config.h"
 #include <QDebug>
 HomePage::HomePage(MApplicationWindow* wind):MApplicationPage()
 {
@@ -6,7 +7,11 @@ HomePage::HomePage(MApplicationWindow* wind):MApplicationPage()
     this->setTitle("Home Page");
     VLay=new QGraphicsGridLayout(this->centralWidget());
     im=new MImageWidget(this->centralWidget());
-    QPixmap pp("usr/share/Meego-KVP-Client/style/logo.gif");
+
+    QString logo_image( KVP_THEMES_STYLE_DIR );
+    logo_image += KVP_THEMES_LOGO;
+
+    QPixmap pp( logo_image );
     im->setPixmap(pp);
 
     VLay=new QGraphicsGridLayout(this->centralWidget());

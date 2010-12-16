@@ -15,7 +15,7 @@
    id="svg6261"
    version="1.1"
    inkscape:version="0.47 r22583"
-   sodipodi:docname="green64x64.svg">
+   sodipodi:docname="icon-user-offline.svg">
   <defs
      id="defs6263">
     <inkscape:perspective
@@ -109,11 +109,11 @@
     <linearGradient
        id="linearGradient3632">
       <stop
-         style="stop-color:#00ff35;stop-opacity:1;"
+         style="stop-color:#ff0031;stop-opacity:1;"
          offset="0"
          id="stop3634" />
       <stop
-         style="stop-color:#18ff69;stop-opacity:0.47058824;"
+         style="stop-color:#ff2318;stop-opacity:0.47058824;"
          offset="1"
          id="stop3636" />
     </linearGradient>
@@ -161,22 +161,59 @@
     </rdf:RDF>
   </metadata>
   <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer">
+    <rect
+       style="fill:none"
+       id="rect2832"
+       width="4"
+       height="6.5454545"
+       x="-0.36363637"
+       y="0" />
+    <rect
+       style="fill:none"
+       id="rect2834"
+       width="64.36364"
+       height="64.909088"
+       x="-0.36363637"
+       y="-0.18181819" />
+    <rect
+       style="fill:none"
+       id="rect2836"
+       width="64.545456"
+       height="63.636364"
+       x="-0.36363637"
+       y="-0.36363637" />
+  </g>
+  <g
      id="layer1"
      inkscape:label="Layer 1"
      inkscape:groupmode="layer">
-    <path
-       sodipodi:type="arc"
-       style="fill:url(#radialGradient6361);fill-opacity:1;stroke:none"
-       id="path2856"
-       sodipodi:cx="16.967615"
-       sodipodi:cy="15.880765"
-       sodipodi:rx="15.449461"
-       sodipodi:ry="15.851325"
-       d="m 32.417076,15.880765 a 15.449461,15.851325 0 1 1 -5e-6,-0.01345"
-       sodipodi:start="0"
-       sodipodi:end="6.2823368"
-       sodipodi:open="true"
-       transform="matrix(0.92703192,0,0,0.90552275,15.89934,17.528698)" />
+    <g
+       id="g2841"
+       inkscape:label="#icon-user-offline">
+      <rect
+         y="-0.36363637"
+         x="-0.36363637"
+         height="65.090912"
+         width="65.090912"
+         id="rect2838"
+         style="fill:none" />
+      <path
+         transform="matrix(0.92703192,0,0,0.90552275,15.89934,17.528698)"
+         sodipodi:open="true"
+         sodipodi:end="6.2823368"
+         sodipodi:start="0"
+         d="m 32.417076,15.880765 a 15.449461,15.851325 0 1 1 -5e-6,-0.01345"
+         sodipodi:ry="15.851325"
+         sodipodi:rx="15.449461"
+         sodipodi:cy="15.880765"
+         sodipodi:cx="16.967615"
+         id="icon-user-offline"
+         style="fill:url(#radialGradient6361);fill-opacity:1;stroke:none"
+         sodipodi:type="arc" />
+    </g>
     <path
        transform="matrix(0.51499288,0,0,0.51992894,22.986928,23.400757)"
        sodipodi:type="arc"
