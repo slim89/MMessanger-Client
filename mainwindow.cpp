@@ -33,6 +33,10 @@ MainWindow::MainWindow():MApplicationWindow()
     QObject::connect(page4,SIGNAL(changeSettings()),this,SLOT(ApplyNewSettings()));
     QObject::connect(thread2,SIGNAL(readyMessage(Message*)),this,SLOT(ListenServer(Message*)));
     QObject::connect(page6,SIGNAL(goDialogPage(QString)),this,SLOT(GoDialogPage(QString)));
+
+    //***Signal incomingMessage(QString) should be replaced real signal about incoming message for user.***
+    QObject::connect( page6, SIGNAL(incomingMessage(QString)),page6, SLOT(displayMeesage(QString)));
+    //*****************************************************************************************************
 }
 void MainWindow::ListenServer(Message * mes)
 {

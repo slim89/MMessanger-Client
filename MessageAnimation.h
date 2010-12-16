@@ -18,17 +18,14 @@ class MessageAnimation : public QObject
    bool hasMessage(QString username);
    void RemoveUser(QString username);
    QString Thumbnail( QString username, QString status );
+   void StartAll();
 
 signals:
 //    void animate();
     void update();
 
-public slots:
-    void reStart();
-
 private slots:
     void moveFrame();
-    void startUnread();
 
 private:
     QList<QString> users;

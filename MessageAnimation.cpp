@@ -37,7 +37,7 @@ void MessageAnimation::Stop(QString username)
     if(hasMessage(username))
         users.removeAll(username);
 
-    QTimer::singleShot(4000, this, SLOT(startUnread()));
+    //QTimer::singleShot(4000, this, SLOT(startUnread()));
 
 }
 
@@ -49,27 +49,10 @@ bool MessageAnimation::hasMessage(QString username)
         return false;
 }
 
-void MessageAnimation::reStart()
-{
-    if(!(timer->isActive()))
-        timer->start(200);
-}
-
 void MessageAnimation::moveFrame()
 {
     emit update();
     frame = !frame;
-}
-
-void MessageAnimation::startUnread()
-{
-    if(!users.empty())
-    {
-        if(!(timer->isActive()))
-            timer->start(200);
-    }
-    else
-        emit update();
 }
 
 void MessageAnimation::RemoveUser(QString username)
@@ -112,3 +95,15 @@ QString MessageAnimation::Thumbnail( QString username, QString status )
     return status_icon;
 }
 
+void MessageAnimation::StartAll()
+{
+    if(!users.empty())
+    {
+        qDebug()<<">>>MessageAnimation::StartAll() : users: "<<users;
+        if(!(timer->isActive()))
+            timer->start(200);
+    }
+    else
+        emit update();
+
+}

@@ -26,11 +26,13 @@ public slots:
 
 signals:
     void goDialogPage(QString username);
+    void incomingMessage(QString);       //test
 
 protected:
     virtual void createContent();
 
 private slots:
+    void onAppeared();
     void displayContact(const QModelIndex &index);
     void updateContatsListView();
 

@@ -56,6 +56,7 @@ void ContactlistPage::createContent()
 
     messageAnimation->connect(messageAnimation, SIGNAL(update()), this, SLOT(updateContatsListView()));
 
+    QObject::connect( this, SIGNAL(appeared()), this, SLOT(onAppeared()));
 }
 
 void ContactlistPage::displayContact(const QModelIndex &index)
@@ -88,6 +89,11 @@ void ContactlistPage::displayMeesage(QString username)
 {
     qDebug()<<">>>MainPage::displayMeesage(QString username)";
     messageAnimation->Start(username);
+}
+
+void ContactlistPage::onAppeared()
+{
+    messageAnimation->StartAll();
 }
 
 void ContactlistPage::Add(QString username, QString status)
