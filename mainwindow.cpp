@@ -16,7 +16,7 @@ MainWindow::MainWindow():MApplicationWindow()
     page6 = new ContactlistPage();
     page7=new DialogPage(this);
     sock= new ClientSocket();
-    //sock->ConnectToHost();
+    sock->ConnectToHost();
     thread1=new SendThread(sock);
     thread2=new RecvThread(sock);
     page1->appear();
@@ -30,6 +30,7 @@ MainWindow::MainWindow():MApplicationWindow()
     QObject::connect(page1,SIGNAL(goInfoPage()),page5,SLOT(appear()));
     QObject::connect(page2,SIGNAL(readySend(QString)),this,SLOT(StartSendThread(QString)));
     QObject::connect(page3,SIGNAL(readySend(QString)),this,SLOT(StartSendThread(QString)));
+    QObject::connect(page7,SIGNAL(readySend(QString)),this,SLOT(StartSendThread(QString)));
     QObject::connect(page4,SIGNAL(changeSettings()),this,SLOT(ApplyNewSettings()));
     QObject::connect(thread2,SIGNAL(readyMessage(Message*)),this,SLOT(ListenServer(Message*)));
     QObject::connect(page6,SIGNAL(goDialogPage(QString)),this,SLOT(GoDialogPage(QString)));
@@ -76,14 +77,19 @@ void MainWindow::ListenServer(Message * mes)
 
     else
     {
-
-         if ("connect"==mes->GetPart("o"))
+        if ("connect"==mes->GetPart("o"))
         {
-            page6->Add(QString::fromStdString(mes->GetPart("s")),QString::fromStdString(mes->GetPart("o")));
+            page6->Add(mes->GetPart("s"),mes->GetPart("o"));
         }
         if ("disconnect"==mes->GetPart("o"))
         {
-            page6->Remove(QString::fromStdString(mes->GetPart("s")));
+            page6->Remove(mes->GetPart("s"));
+        }
+        if (""==mes->GetPart("o"))
+        {
+            qCritical()<<">>sender"<<mes->GetPart("s");
+            qCritical()<<">>message"<<mes->GetPart("m");
+            page7->Display(mes->GetPart("s"),mes->GetPart("m"));
         }
     }
 

@@ -60,11 +60,12 @@ void ContactlistPage::createContent()
 
 void ContactlistPage::displayContact(const QModelIndex &index)
 {
-    qDebug() << ">>>ContactlistPage::displayContact : index row" << index.row() <<", contact num="<<index.row()*2;
+    qDebug() << ">>>ContactlistPage::displayContact : index row" << index.row() <<", contact num="<<index.row()*3;
 
-    QString cname = activeContacts[index.row()*2];
+    QString cname = activeContacts[index.row()*3];
 
     qDebug() << ">>>ContactlistPage::displayContact" << cname;
+    qCritical()<<">>>ContactlistPage::displayContact" << cname;
 
     emit goDialogPage(cname);
 

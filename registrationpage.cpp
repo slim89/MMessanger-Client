@@ -94,7 +94,7 @@ void RegistrationPage::tryToReg()
                 //имя не=ser*ver, не больше 15 символов и первый симовл не # ,не содержит * а пароль меньше 10 симолов
             {
                     if(pass.length()<10){
-                           str1="#type/log#o/registration#l/"+log+"#p/"+pass; //отправляем сформированную строку-сообщение
+                        str1="#type/log#o/registration#l/"+log+"#p/"+pass+"#/"; //отправляем сформированную строку-сообщение
                            emit readySend(str1);
                     }
                     else{

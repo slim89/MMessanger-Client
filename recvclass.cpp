@@ -3,7 +3,6 @@
 #include <QByteArray>
 #include <string>
 #include <QTextCodec>
-using namespace std;
 
 RecvThread::RecvThread(ClientSocket* sock):
     QThread()
@@ -21,12 +20,11 @@ void RecvThread::run()
 }
 void RecvThread::readFromServer()
 {
-    cout<<"READ FROM"<<endl;   
+    qCritical()<<"READ FROM";
     QByteArray str;
     str=socket->Read();
     QString tmp=str;
-    string buf=tmp.toStdString();
-    cout<<"STR"<<buf<<endl;
-    Message* mes=new Message(buf);
+    qCritical()<<"STR"<<tmp;
+    Message* mes=new Message(tmp);
     emit readyMessage(mes);
 }

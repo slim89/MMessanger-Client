@@ -1,44 +1,38 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <sys/select.h>
-#include <sys/time.h>
-#include <netinet/in.h>
-#include <stdio.h>
-#include <string>
-#include <unistd.h>
-#include <fcntl.h>
-#include <pthread.h>
-#include <iostream>
-using namespace std;
-class IMessage
+#include <QString>
+#include <QMap>
+#include <QDebug>
+#include <QObject>
+class IMessage: public QObject
 {
+    Q_OBJECT
     public:
-        virtual void ReplacePart(string,string)=0;
-        virtual void AddPart(string,string)=0;
-        virtual string GetPart(string)=0;
+        //explicit IMessage(QObject *parent = 0);
+        virtual void ReplacePart(QString,QString)=0;
+        virtual void AddPart(QString,QString)=0;
+        virtual QString GetPart(QString)=0;
         virtual void Parse()=0;
-        virtual string Unparse()=0;
-        virtual IMessage* Copy()=0;
+        virtual QString Unparse()=0;
+        virtual IMessage* Clone()=0;
 };
+
 class Message:public IMessage
 {
     protected:
-        string unparse_buf;
-        string* prefix;
-        string* value;
-        int real_size;
+        QString unparse_buf;
+        QMap<QString, QString> key_value;
+        bool state;
     public:
-        void ReplacePart(string,string);
-        Message(string);
+        void ReplacePart(QString,QString);
+        Message(QString buf="");
         Message(const Message &);
-        IMessage* Copy();
-        void AddPart(string,string);
-        string GetPart(string);
-        void Write();
+        IMessage* Clone();
+        void AddPart(QString,QString);
+        QString GetPart(QString);
         void Parse();
-        string Unparse();
+        QString Unparse();
+        int NumOfPair();
         ~Message();
 };
 #endif // MESSAGE_H
