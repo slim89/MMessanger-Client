@@ -50,15 +50,11 @@ HEADERS += \
     config.h
 
 OTHER_FILES += \
-    style/background.svg \
     style/Meego-KVP-Client.css \
-    style/button.svg \
     style/logo.gif \
-    style/empty.svg \
-    style/green64x64.svg \
-    style/red64x64.svg \
-    style/message64x64.svg \
     svg/my-meegotouch-list.svg \
     svg/my-icon-incoming-message.svg \
     svg/icon-user-online.svg \
-    svg/icon-user-offline.svg
+    svg/icon-user-offline.svg \
+    svg/button.svg \
+    svg/background.svg
