@@ -1,108 +1,104 @@
 #include "message.h"
-int max_count_prefix=10;
-Message::Message(string buf)
+
+Message::Message(QString buf)
 {
     unparse_buf=buf;
-    prefix=new string[max_count_prefix];
-    value=new string[max_count_prefix];
-    real_size=0;
+    state=false;
+}
+int Message::NumOfPair()
+{
+    return key_value.size();
 }
 Message::Message(const Message &obj)
 {
     unparse_buf=obj.unparse_buf;
-    real_size=obj.real_size;
-    prefix=new string[max_count_prefix];
-    value=new string[max_count_prefix];
-    for (int i=0;i<real_size;i++)
-    {
-        prefix[i]=obj.prefix[i];
-        value[i]=obj.value[i];
-    }
+    key_value=obj.key_value;
+    state=obj.state;
 }
-IMessage* Message::Copy()
+IMessage* Message::Clone()
 {
     IMessage* newmes=new Message(*this);
     return newmes;
 }
 
-
-void Message::ReplacePart(string _prefix,string _value)
+void Message::ReplacePart(QString _prefix,QString _value)
 {
-    int flag=0;
-    for(int i=0;i<real_size;i++)
+    key_value[_prefix]=_value;
+}
+
+
+void Message::AddPart(QString _prefix,QString _value)
+{
+    key_value[_prefix]=_value;
+}
+
+
+QString Message::GetPart(QString _prefix)
+{
+    return key_value[_prefix];
+}
+
+
+void Message::Parse()//Modified by Andrey 16/12/2010  //Correct by Dmitry 16/12/2010
+{
+    int i=1;
+    QString key,value;
+   /* while (unparse_buf[i]!='#')// Править
     {
-        if (prefix[i]==_prefix)
+        if (unparse_buf[i]!='\0')//не актуально!!!!!!!ПРАВИТЬ!!!!!!!!!!!!!!!!!!
+            i++;
+        else
         {
-            value[i]=_value;flag=1;
+            state=true;
+            return;
         }
     }
-    if (flag==0)
-        AddPart(_prefix,_value);
-}
-
-
-void Message::AddPart(string _prefix,string _value)
-{
-    prefix[real_size]=_prefix;
-    value[real_size]=_value;
-    real_size++;
-}
-
-
-string Message::GetPart(string prefix)
-{
-    for (int i=0;i<real_size;i++)
+    */
+    //for(;i<unparse_buf.length();i++)
+    while(i<unparse_buf.length())
     {
-        if (this->prefix[i]==prefix)
+        if((unparse_buf[i]=='#') && (unparse_buf[i+1]=='\''))//экранируем тело сообщения и конец сообщения ' и / соттветственно
         {
-            return this->value[i];
-        }
-    }
-    return "";
-}
-
-
-void Message::Parse()
-{
-    int i=0,j;
-    string str;
-    j=real_size;
-    while (unparse_buf[i]!='#')
-        i++;
-    for(i;i<unparse_buf.length();i++)
-    {
-        if(unparse_buf[i]=='#')
-        {
+            i++;
             continue;
         }
-        while((unparse_buf[i]!='/')&&(unparse_buf[i]!='\0'))
+        while((unparse_buf[i]!='/'))
         {
-            prefix[j]=prefix[j]+unparse_buf[i];
+            key+=unparse_buf[i];
             i++;
         }
         i++;
-        while((unparse_buf[i]!='#')&&(unparse_buf[i]!='\0'))
+        while(((unparse_buf[i]!='#')||(unparse_buf[i+1]=='\''))&&(i!=unparse_buf.length()))
         {
-            value[j]=value[j]+unparse_buf[i];
+            value+=unparse_buf[i];
             i++;
         }
-        j++;
+        key_value[key]=value;
+        key.clear();
+        value.clear();
+        if(i!=unparse_buf.length())
+        {
+            i++;
+        }
     }
-    real_size=j;
+    state=true;
 }
 
 
-string Message::Unparse()
+QString Message::Unparse()
 {
-    string str;
-    for (int i=0;i<real_size;i++)
-        str=str+'#'+prefix[i]+'/'+value[i];
-    return str;
+    QString str;
+    QMapIterator<QString, QString> it(key_value);
+    while (it.hasNext())
+    {
+        it.next();
+        str+='#'+it.key()+'/'+it.value();
+    }
+    return (str +"#/");//добавляем конец сообщения
 }
 
 
 Message::~Message()
 {
-    delete [] value;
-    delete [] prefix;
+    key_value.clear();
 }

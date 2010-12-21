@@ -40,17 +40,18 @@ QByteArray ClientSocket::Read()
     array.clear();
     QByteArray tmp=sock.peek(1024);
     int i1=0;
-    while(tmp[i1]!='\0')
+    while((tmp[i1]!='#')||(tmp[i1+1]!='/'))
     {
         i1++;
     }
-    array=sock.read(i1+1);
+    array=sock.read(i1+2);
+    array=array.left(i1);
     return array;
 }
 
 int ClientSocket::Write(QByteArray str)
 {
-    sock.write(str);
+    sock.write(str+"#/");
     return 0;
    /* if(IsSocketCorrect())
     {
