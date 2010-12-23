@@ -134,7 +134,7 @@ void ContactlistPage::UpdateContacts(QMap<QString, QString> contactsList)
     while (i != contactsList.constEnd()) {
         activeContacts << i.key() << i.value();
         activeContacts << messageAnimation->Thumbnail( i.key(), i.value() );
-         ++i;
+        ++i;
     }
     cmodel->setActiveContcts(activeContacts);
 }

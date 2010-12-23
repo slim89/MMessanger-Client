@@ -107,3 +107,23 @@ void MessageAnimation::StartAll()
         emit update();
 
 }
+
+int MessageAnimation::getTimerID()
+{
+    return timer->timerId();
+}
+
+QList<QString> MessageAnimation::getUsers()
+{
+    return users;
+}
+
+void MessageAnimation::StopAnimation()
+{
+    if ( timer->isActive() )
+        timer->stop();
+
+    frame = 0;
+
+    emit update();
+}
