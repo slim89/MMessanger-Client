@@ -42,6 +42,9 @@ public slots:
     void ListenServer(Message* mes);
     void GoDialogPage(QString);
 
+signals:
+    void incomingMessage(QString);
+
 };
 
 #endif // MAINWINDOW_H

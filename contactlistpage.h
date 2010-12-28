@@ -28,7 +28,6 @@ public slots:
 
 signals:
     void goDialogPage(QString username);
-    void incomingMessage(QString);       //test
 
 protected:
     virtual void createContent();
