@@ -17,6 +17,7 @@ class MessageAnimation : public QObject
    void Stop(QString username);
    bool hasMessage(QString username);
    void RemoveUser(QString username);
+   void AddUser(QString username);
    QString Thumbnail( QString username, QString status );
    void StartAll();
    int getTimerID();

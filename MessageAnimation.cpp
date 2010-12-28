@@ -61,6 +61,11 @@ void MessageAnimation::RemoveUser(QString username)
     users.removeAll(username);
 }
 
+void MessageAnimation::AddUser(QString username)
+{
+    users << username;
+}
+
 QString MessageAnimation::Frame()
 {
     QString message_frame( KVP_THEMES_SVG_DIR );

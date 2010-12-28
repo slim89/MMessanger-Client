@@ -62,6 +62,8 @@ void ContactlistPage::createContent()
     messageAnimation->connect(messageAnimation, SIGNAL(update()), this, SLOT(updateContatsListView()));
 
     QObject::connect( this, SIGNAL(appeared()), this, SLOT(onAppeared()));
+
+    scrolling = 0;
 }
 
 void ContactlistPage::displayContact(const QModelIndex &index)
@@ -93,23 +95,28 @@ void ContactlistPage::updateContatsListView()
 
 void ContactlistPage::startPannigList()
 {
+    scrolling = 1;
     messageAnimation->StopAnimation();
 }
 
 void ContactlistPage::stopPannigList()
 {
     messageAnimation->StartAll();
+    scrolling = 0;
 }
 
 void ContactlistPage::displayMeesage(QString username)
 {
     qDebug()<<">>>MainPage::displayMeesage(QString username)";
-    messageAnimation->Start(username);
+    if (scrolling)
+        messageAnimation->AddUser(username);
+    else
+        messageAnimation->Start(username);
 }
 
 void ContactlistPage::onAppeared()
 {
-    messageAnimation->StartAll();
+    if ( !scrolling ) messageAnimation->StartAll();
 }
 
 void ContactlistPage::Add(QString username, QString status)

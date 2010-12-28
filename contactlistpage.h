@@ -45,6 +45,7 @@ private:
     ContactsListModel* cmodel;
     MList *clist;
     MessageAnimation* messageAnimation;
+    int scrolling;
 
     void UpdateContacts(QMap<QString, QString> contactsList);
 
