@@ -12,6 +12,7 @@
 ContactlistPage::ContactlistPage(QGraphicsItem *parent)
     : MApplicationPage(parent)
 {
+    clist = NULL;
     setTitle("Contacts");
 }
 
@@ -38,7 +39,7 @@ void ContactlistPage::createContent()
 
     qDebug()<<">>>ContactlistPage::createContent() : activeContacts" << activeContacts;
 
-    MList *clist = new MList;
+    clist = new MList;
     MContentItemCreator * cellCreator = new MContentItemCreator;
 
     clist->setCellCreator(cellCreator);
@@ -53,6 +54,10 @@ void ContactlistPage::createContent()
 
     connect(clist, SIGNAL(itemClicked(QModelIndex)),
             this, SLOT(displayContact(QModelIndex)));
+
+    connect(clist, SIGNAL(panningStarted()), this, SLOT(startPannigList()));
+
+    connect(clist, SIGNAL(panningStopped()), this, SLOT(stopPannigList()));
 
     messageAnimation->connect(messageAnimation, SIGNAL(update()), this, SLOT(updateContatsListView()));
 
@@ -84,6 +89,16 @@ void ContactlistPage::updateContatsListView()
     qDebug() << ">>>ContactlistPage::updateContatsListView() : List = " << activeContacts;
 
     UpdateContacts(contactsList);
+}
+
+void ContactlistPage::startPannigList()
+{
+    messageAnimation->StopAnimation();
+}
+
+void ContactlistPage::stopPannigList()
+{
+    messageAnimation->StartAll();
 }
 
 void ContactlistPage::displayMeesage(QString username)
@@ -124,6 +139,11 @@ QString ContactlistPage::getStatusByName(QString username)
     QMap<QString, QString>::const_iterator i = contactsList.find(username);
 
     return i.value();
+}
+
+MList* ContactlistPage::getList()
+{
+    return clist;
 }
 
 void ContactlistPage::UpdateContacts(QMap<QString, QString> contactsList)

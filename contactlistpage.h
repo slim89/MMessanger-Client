@@ -20,6 +20,8 @@ public:
     QList<QString> getUsernameList();
     QString getStatusByName(QString username);
 
+    MList* getList();
+
     //QMap<QString, QString> findContactByStatus(QString username);
 public slots:
     void displayMeesage(QString);
@@ -35,11 +37,14 @@ private slots:
     void onAppeared();
     void displayContact(const QModelIndex &index);
     void updateContatsListView();
+    void startPannigList();
+    void stopPannigList();
 
 private:
     QMap<QString, QString> contactsList; // Contacts list with status strings
     QList<QString> activeContacts; //Current contacts list
     ContactsListModel* cmodel;
+    MList *clist;
     MessageAnimation* messageAnimation;
 
     void UpdateContacts(QMap<QString, QString> contactsList);

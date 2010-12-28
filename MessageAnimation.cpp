@@ -37,6 +37,7 @@ void MessageAnimation::Stop(QString username)
     if(hasMessage(username))
         users.removeAll(username);
 
+    frame = 0;
     //QTimer::singleShot(4000, this, SLOT(startUnread()));
 
 }
