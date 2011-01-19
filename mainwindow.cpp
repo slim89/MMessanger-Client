@@ -36,7 +36,7 @@ MainWindow::MainWindow():MApplicationWindow()
     QObject::connect(page6,SIGNAL(goDialogPage(QString)),this,SLOT(GoDialogPage(QString)));
 
     //***Signal incomingMessage(QString) should be replaced real signal about incoming message for user.***
-    QObject::connect(this, SIGNAL(incomingMessage(QString)),page6, SLOT(displayMeesage(QString)));
+    QObject::connect(this, SIGNAL(incomingMessage(QString, QString)),page6, SLOT(displayMessage(QString,QString)));
     //*****************************************************************************************************
 }
 void MainWindow::ListenServer(Message * mes)
@@ -83,7 +83,7 @@ void MainWindow::ListenServer(Message * mes)
     {
         if ("connect"==mes->GetPart("o"))
         {
-            page6->Add(mes->GetPart("s"),mes->GetPart("o"));
+            page6->Add(mes->GetPart("id"), mes->GetPart("s"),mes->GetPart("o"));
         }
         if ("disconnect"==mes->GetPart("o"))
         {
@@ -100,7 +100,7 @@ void MainWindow::ListenServer(Message * mes)
             else
             {
                 page7->Display(mes->GetPart("s"),mes->GetPart("m"));
-                emit incomingMessage(mes->GetPart("s"));
+                emit incomingMessage(mes->GetPart("id"), mes->GetPart("s"));
             }
         }
     }

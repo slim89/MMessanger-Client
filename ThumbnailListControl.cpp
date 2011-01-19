@@ -1,48 +1,60 @@
 #include <QDebug>
-#include "MessageAnimation.h"
+#include "ThumbnailListControl.h"
 #include "config.h"
 
-MessageAnimation::MessageAnimation()
+#define START_TIME 0
+
+ThumbnailListControl::ThumbnailListControl()
 {
     frame = 0;
+
+#ifdef MESSAGE_ANIMATION
     timer = new QTimer(this);
 
     connect(timer, SIGNAL(timeout()), this, SLOT(moveFrame()));
+#endif
 }
 
-MessageAnimation::~ MessageAnimation()
+ThumbnailListControl::~ ThumbnailListControl()
 {
+#ifdef MESSAGE_ANIMATION
     if ( timer->isActive() )
         timer->stop();
     delete timer;
+#endif
 }
 
-void MessageAnimation::Start(QString username)
+void ThumbnailListControl::Start(QString username)
 {
     if(!hasMessage(username))
     {
         users << username;
         //UpdateContacts(contactsList);
     }
-
-    if (!timer->isActive())
+#ifdef MESSAGE_ANIMATION
+    if(!(timer->isActive()))
         timer->start(200);
+#else
+        emit update();
+#endif
 }
 
-void MessageAnimation::Stop(QString username)
+void ThumbnailListControl::Stop(QString username)
 {
+#ifdef MESSAGE_ANIMATION
     if ( timer->isActive() )
         timer->stop();
+#endif
 
     if(hasMessage(username))
         users.removeAll(username);
 
     frame = 0;
-    //QTimer::singleShot(4000, this, SLOT(startUnread()));
+    //QTimer::singleShot(4000, this, SLOT(StartOnTimer()));
 
 }
 
-bool MessageAnimation::hasMessage(QString username)
+bool ThumbnailListControl::hasMessage(QString username)
 {
     if (!users.empty())
         return users.contains(username);
@@ -50,23 +62,29 @@ bool MessageAnimation::hasMessage(QString username)
         return false;
 }
 
-void MessageAnimation::moveFrame()
+void ThumbnailListControl::moveFrame()
 {
     emit update();
     frame = !frame;
 }
 
-void MessageAnimation::RemoveUser(QString username)
+void ThumbnailListControl::StartOnTimer()
+{
+    if(!(timer->isActive()))
+        timer->start(200);
+}
+
+void ThumbnailListControl::RemoveUser(QString username)
 {
     users.removeAll(username);
 }
 
-void MessageAnimation::AddUser(QString username)
+void ThumbnailListControl::AddUser(QString username)
 {
     users << username;
 }
 
-QString MessageAnimation::Frame()
+QString ThumbnailListControl::Frame()
 {
     QString message_frame( KVP_THEMES_SVG_DIR );
 
@@ -78,9 +96,9 @@ QString MessageAnimation::Frame()
         return "";
 }
 
-QString MessageAnimation::Thumbnail( QString username, QString status )
+QString ThumbnailListControl::Thumbnail( QString username, QString status )
 {
-    qDebug()<<">>>MessageAnimation::Thumbnail(QString username, QString status)";
+    qDebug()<<">>>ThumbnailListControl::Thumbnail(QString username, QString status)";
 
     QString status_icon( KVP_THEMES_SVG_DIR );
 
@@ -101,35 +119,41 @@ QString MessageAnimation::Thumbnail( QString username, QString status )
     return status_icon;
 }
 
-void MessageAnimation::StartAll()
+void ThumbnailListControl::StartAll()
 {
     if(!users.empty())
     {
-        qDebug()<<">>>MessageAnimation::StartAll() : users: "<<users;
-        if(!(timer->isActive()))
-            timer->start(200);
+        qDebug()<<">>>ThumbnailListControl::StartAll() : users: "<<users;
+#ifdef MESSAGE_ANIMATION
+        QTimer::singleShot(START_TIME, this, SLOT(StartOnTimer()));
+#else
+        emit update();
+#endif
     }
     else
         emit update();
 
 }
 
-int MessageAnimation::getTimerID()
+int ThumbnailListControl::getTimerID()
 {
     return timer->timerId();
 }
 
-QList<QString> MessageAnimation::getUsers()
+QList<QString> ThumbnailListControl::getUsers()
 {
     return users;
 }
 
-void MessageAnimation::StopAnimation()
+void ThumbnailListControl::StopAnimation()
 {
+#ifdef MESSAGE_ANIMATION
     if ( timer->isActive() )
         timer->stop();
+#endif
 
     frame = 0;
 
     emit update();
 }
+

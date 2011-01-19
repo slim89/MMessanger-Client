@@ -1,18 +1,17 @@
-#ifndef MESSAGEANIMATION_H
-#define MESSAGEANIMATION_H
-
+#ifndef THUMBNAILLISTCONTROL_H
+#define THUMBNAILLISTCONTROL_H
 #include <QTimer>
 #include <QList>
 #include <QObject>
 #include <QString>
 
-class MessageAnimation : public QObject
+class ThumbnailListControl : public QObject
 {
    Q_OBJECT
 
  public:
-   MessageAnimation();
-   virtual ~ MessageAnimation();
+   ThumbnailListControl();
+   virtual ~ ThumbnailListControl();
    void Start(QString username);
    void Stop(QString username);
    bool hasMessage(QString username);
@@ -30,6 +29,7 @@ signals:
 
 private slots:
     void moveFrame();
+    void StartOnTimer();
 
 private:
     QList<QString> users;
@@ -40,4 +40,4 @@ private:
 
 };
 
-#endif // MESSAGEANIMATION_H
+#endif // THUMBNAILLISTCONTROL_H

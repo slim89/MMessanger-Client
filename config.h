@@ -18,4 +18,6 @@
 //images
 #define KVP_THEMES_LOGO "logo.gif"
 
+#define MESSAGE_ANIMATION
+
 #endif // CONFIG_H

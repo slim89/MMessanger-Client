@@ -43,7 +43,7 @@ public slots:
     void GoDialogPage(QString);
 
 signals:
-    void incomingMessage(QString);
+    void incomingMessage(QString, QString);
 
 };
 

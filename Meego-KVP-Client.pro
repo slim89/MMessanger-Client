@@ -28,7 +28,7 @@ SOURCES += main.cpp \
     contactlistpage.cpp \
     clientsocket.cpp \
     dialogpage.cpp \
-    MessageAnimation.cpp
+    ThumbnailListControl.cpp
 
 HEADERS += \
     settingpage.h \
@@ -46,8 +46,8 @@ HEADERS += \
     contact_data.h \
     clientsocket.h \
     dialogpage.h \
-    MessageAnimation.h \
-    config.h
+    config.h \
+    ThumbnailListControl.h
 
 OTHER_FILES += \
     style/Meego-KVP-Client.css \

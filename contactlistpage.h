@@ -5,7 +5,7 @@
 #include <MList>
 #include <QHash>
 #include "list_model.h"
-#include "MessageAnimation.h"
+#include "ThumbnailListControl.h"
 
 class ContactlistPage: public MApplicationPage
 {
@@ -14,17 +14,21 @@ class ContactlistPage: public MApplicationPage
 public:
     ContactlistPage(QGraphicsItem *parent = 0);
     virtual ~ ContactlistPage();
-    void Add(QString username, QString status);
-    void Remove(QString username);
 
-    QList<QString> getUsernameList();
-    QString getStatusByName(QString username);
+    void Add(QString user_id, QString username, QString status);
+    void Remove(QString user_id);
+
+    //QList<QString> getUsernameList();
+    //QString getStatusByName(QString username);
+
+    QList<QString> getActiveContactList();
+    QString getStatusByDisplayName(QString userID, QString username);
 
     MList* getList();
 
     //QMap<QString, QString> findContactByStatus(QString username);
 public slots:
-    void displayMeesage(QString);
+    void displayMessage(QString, QString);
 
 signals:
     void goDialogPage(QString username);
@@ -44,11 +48,12 @@ private:
     QList<QString> activeContacts; //Current contacts list
     ContactsListModel* cmodel;
     MList *clist;
-    MessageAnimation* messageAnimation;
+    ThumbnailListControl* thumbnailListControl;
     int scrolling;
+    QString readFrom;
 
-    void UpdateContacts(QMap<QString, QString> contactsList);
-
+    void UpdateContacts();
+    QString displayName(QString userID, QString username);
 };
 
 

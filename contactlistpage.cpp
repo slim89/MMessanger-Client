@@ -18,24 +18,29 @@ ContactlistPage::ContactlistPage(QGraphicsItem *parent)
 
 ContactlistPage::~ContactlistPage()
 {
-    delete messageAnimation;
+    delete thumbnailListControl;
 }
 
 void ContactlistPage::createContent()
 {
     qDebug()<<">>>ContactlistPage::createContent() ";
 
-    messageAnimation = new MessageAnimation();
+    thumbnailListControl = new ThumbnailListControl();
 
     QGraphicsLinearLayout *layout = new QGraphicsLinearLayout(Qt::Vertical);
 
     centralWidget()->setLayout(layout);
 
-    contactsList["System Administraition"] = "connect";
+    //contactsList["System Administraition"] = "connect";
 
-    activeContacts << contactsList.keys("connect");
-    activeContacts << contactsList.value("System Administraition");
-    activeContacts << messageAnimation->Thumbnail("System Administraition", "connect");
+    //activeContacts << contactsList.keys("connect");
+    //activeContacts << contactsList.value("System Administraition");
+    //activeContacts << thumbnailListControl->Thumbnail("System Administraition", "connect");
+
+    contactsList[displayName("777","System Administraition")] = "connect";
+
+    activeContacts << displayName("777","System Administraition") << "connect";
+    activeContacts << thumbnailListControl->Thumbnail(displayName("777","System Administraition"), "connect");
 
     qDebug()<<">>>ContactlistPage::createContent() : activeContacts" << activeContacts;
 
@@ -59,25 +64,23 @@ void ContactlistPage::createContent()
 
     connect(clist, SIGNAL(panningStopped()), this, SLOT(stopPannigList()));
 
-    messageAnimation->connect(messageAnimation, SIGNAL(update()), this, SLOT(updateContatsListView()));
+    thumbnailListControl->connect(thumbnailListControl, SIGNAL(update()), this, SLOT(updateContatsListView()));
 
     QObject::connect( this, SIGNAL(appeared()), this, SLOT(onAppeared()));
 
     scrolling = 0;
+    readFrom = "";
 }
 
 void ContactlistPage::displayContact(const QModelIndex &index)
 {
     qDebug() << ">>>ContactlistPage::displayContact : index row" << index.row() <<", contact num="<<index.row()*3;
 
-    QString cname = activeContacts[index.row()*3];
+    readFrom = activeContacts[index.row()*3];
 
-    qDebug() << ">>>ContactlistPage::displayContact" << cname;
-    qCritical()<<">>>ContactlistPage::displayContact" << cname;
+    emit goDialogPage(readFrom);
 
-    emit goDialogPage(cname);
-
-    messageAnimation->Stop(cname);
+    thumbnailListControl->Stop(readFrom);
 
     //ContactsPage  * contactsPage = new ContactsPage(cname);
 
@@ -90,60 +93,87 @@ void ContactlistPage::updateContatsListView()
 {
     qDebug() << ">>>ContactlistPage::updateContatsListView() : List = " << activeContacts;
 
-    UpdateContacts(contactsList);
+    UpdateContacts();
 }
 
 void ContactlistPage::startPannigList()
 {
     scrolling = 1;
-    messageAnimation->StopAnimation();
+    thumbnailListControl->StopAnimation();
 }
 
 void ContactlistPage::stopPannigList()
 {
-    messageAnimation->StartAll();
+    thumbnailListControl->StartAll();
     scrolling = 0;
 }
 
-void ContactlistPage::displayMeesage(QString username)
+void ContactlistPage::displayMessage(QString userID, QString username)
 {
     qDebug()<<">>>MainPage::displayMeesage(QString username)";
-    if (scrolling)
-        messageAnimation->AddUser(username);
+
+    QString dName = displayName(userID, username);
+
+    if (dName == readFrom)
+        thumbnailListControl->RemoveUser(dName);
     else
-        messageAnimation->Start(username);
+    {
+        if (scrolling)
+            thumbnailListControl->AddUser(dName);
+        else
+            thumbnailListControl->Start(dName);
+    }
 }
 
 void ContactlistPage::onAppeared()
 {
-    if ( !scrolling ) messageAnimation->StartAll();
+    if ( !scrolling ) thumbnailListControl->StartAll();
+    readFrom = "";
 }
 
-void ContactlistPage::Add(QString username, QString status)
+void ContactlistPage::Add(QString userID, QString username, QString status)
 {
     qDebug()<<">>>ContactlistPage::Add(QString username, QString status) : Nick = " << username << ", Status" << status;
-    contactsList[username] = status;
-    UpdateContacts(contactsList);
+
+    contactsList[displayName(userID, username)] = status;
+    UpdateContacts();
 }
 
-void ContactlistPage::Remove(QString username)
+void ContactlistPage::Remove(QString userID)
 {
-    qDebug()<<">>>ContactlistPage::Remove(QString username) : Nick = " << username;
-    contactsList.remove(username);
+    qDebug()<<">>>ContactlistPage::Remove(QString userID) : userID = " << userID;
 
-    messageAnimation->RemoveUser(username);
+    QString dName = "";
+    QString currID = "";
 
-    UpdateContacts(contactsList);
+    QMap<QString, QString>::const_iterator i = contactsList.constBegin();
+
+    while ((i != contactsList.constEnd()) && (currID != userID)) {
+        dName = i.key();
+        QStringList list1 = dName.split("( ");
+        QString id_part = list1[1];
+        QStringList list2 = id_part.split(" )");
+        currID = list2[0];
+        ++i;
+    }
+
+    contactsList.remove(dName);
+
+    thumbnailListControl->RemoveUser(dName);
+
+    UpdateContacts();
 }
 
-QList<QString> ContactlistPage::getUsernameList()
+QList<QString> ContactlistPage::getActiveContactList()
 {
     return activeContacts;
 }
 
-QString ContactlistPage::getStatusByName(QString username)
+QString ContactlistPage::getStatusByDisplayName(QString userID, QString username)
 {
-    QMap<QString, QString>::const_iterator i = contactsList.find(username);
+    QString dName = displayName(userID, username);
+
+    QMap<QString, QString>::const_iterator i = contactsList.find(dName);
 
     return i.value();
 }
@@ -153,15 +183,21 @@ MList* ContactlistPage::getList()
     return clist;
 }
 
-void ContactlistPage::UpdateContacts(QMap<QString, QString> contactsList)
+void ContactlistPage::UpdateContacts()
 {
     qDebug()<<">>>ContactlistPage::UpdateContacts(QString nick, QString status)";
     activeContacts.clear();
     QMap<QString, QString>::const_iterator i = contactsList.constBegin();
     while (i != contactsList.constEnd()) {
         activeContacts << i.key() << i.value();
-        activeContacts << messageAnimation->Thumbnail( i.key(), i.value() );
+        activeContacts << thumbnailListControl->Thumbnail( i.key(), i.value() );
         ++i;
     }
     cmodel->setActiveContcts(activeContacts);
+}
+
+QString ContactlistPage::displayName(QString userID, QString username)
+{
+
+    return username + " ( " + userID + " )";
 }
