@@ -1,27 +1,19 @@
 #include "sendthread.h"
-#include "clientsocket.h"
-#include <iostream>
-
-using namespace std;
-
-SendThread::SendThread(ClientSocket* sock):QThread()
+#include <QDebug>
+SendThread::SendThread(QSharedPointer<QTcpSocket> sock):QThread()
 {
-    //QTextCodec::setCodecForCStrings( QTextCodec::codecForName("utf8") );
     mysock = sock;
-    mystr ="";
+    QTextCodec::setCodecForCStrings( QTextCodec::codecForName("utf8") );
 }
 
 void SendThread::run()
 {
-       QByteArray* buf = new QByteArray(mystr.toStdString().c_str());
-       mysock->Write(*buf);
-       cout<<mystr.toStdString()<<endl;
-       mystr ="";
-       cout<<mystr.toStdString()<<endl;
-       //this->exit();
+    qCritical()<<"RUN SEND THREAD";
+    exec();
 }
 
-void  SendThread::set(QString str)
+void  SendThread::writeToServer(QString str)
 {
-    mystr = str;
+    qCritical()<<str;
+    mysock->write(qPrintable(str));
 }

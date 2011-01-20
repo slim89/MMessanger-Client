@@ -88,7 +88,7 @@ void LoginPage::login(){
                 //имя не=ser*ver, не больше 15 символов и первый симовл не # ,не содержит * а пароль меньше 10 симолов
             {
                     if(pass.length()<10){
-                        str ="#type/log#o/login#l/" + log + "#p/" + pass+"#/"; //отправляем сформированную строку-сообщение
+                        str ="#type/log#o/login#id/" + log + "#p/" + pass+"#/"; //отправляем сформированную строку-сообщение
                             emit readySend(str);
                     }
                     else{

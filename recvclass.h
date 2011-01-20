@@ -3,18 +3,19 @@
 #include <QObject>
 #include <QThread>
 #include "message.h"
-#include "clientsocket.h"
+#include <QtNetwork>
 class RecvThread : public QThread
 {
     Q_OBJECT
 private:
-    ClientSocket* socket;
-    void readFromServer();
+    QSharedPointer<QTcpSocket>  socket;
+
 public:
-    explicit RecvThread(ClientSocket* sock);
+    explicit RecvThread(QSharedPointer<QTcpSocket> sock);
     void run();
 signals:
-    void readyMessage(Message* mes);
+    void readyMessage(QSharedPointer<IMessage> mes);
 private slots:
+     void readFromServer();
 };
 #endif // RECVCLASS_H

@@ -3,7 +3,6 @@
 #include <QObject>
 #include <MApplicationWindow>
 #include "sendthread.h"
-#include "clientsocket.h"
 #include "homepage.h"
 #include "loginpage.h"
 #include "registrationpage.h"
@@ -22,7 +21,7 @@ public:
 
 
 private:
-    ClientSocket* sock;
+    QSharedPointer<QTcpSocket> sock;
     HomePage *page1;
     LoginPage *page2;
     RegistrationPage *page3;
@@ -34,16 +33,15 @@ private:
     RecvThread* thread2;
 
 public slots:
-    void StartSendThread(QString);
     void ApplyNewSettings();
     void GoLoginPage();
     void GoHomePage();
     void GoContactListPage();
-    void ListenServer(Message* mes);
+    void ListenServer(QSharedPointer<IMessage> mes);
     void GoDialogPage(QString);
 
 signals:
-    void incomingMessage(QString, QString);
+    void incomingMessage(QString,QString);
 
 };
 

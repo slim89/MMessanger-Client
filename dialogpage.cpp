@@ -34,7 +34,24 @@ void DialogPage::sendClick()
 {
     QString str;
     chat->setText(chat->text()+"I`m:\n  "+message->text()+"\n");
-    str="#type/send#r/"+this->title()+"#m/"+Screen(message->text())+"#/";
+    QString tmp=this->title();
+    qCritical()<<"TMP  "<<tmp;
+    int begin =0;
+    int end = 0;
+    //int begin=tmp.compare(tmp,"( ");
+    //int end=tmp.compare(" )");
+    for(int i=0;i<tmp.length();i++)
+    {
+        if(tmp[i]=='(')
+            begin=i;
+        if(tmp[i]==')')
+            end = i;
+    }
+
+
+    QString id=tmp.mid(begin+2,end-begin-3);
+    qCritical()<<"ID  "<<id<<" end "<<end<<"beg  "<<begin;
+    str="#type/send#id/"+id+"#m/"+Screen(message->text())+"#/";
     qCritical()<<str;
     emit readySend(str);
     message->clear();

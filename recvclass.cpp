@@ -1,30 +1,37 @@
 #include "recvclass.h"
 #include <QString>
 #include <QByteArray>
-#include <string>
 #include <QTextCodec>
 
-RecvThread::RecvThread(ClientSocket* sock):
+RecvThread::RecvThread(QSharedPointer<QTcpSocket> sock):
     QThread()
 {
     socket=sock;
     QTextCodec::setCodecForCStrings( QTextCodec::codecForName("utf8") );
-    connect(socket,SIGNAL(socketReadyRead()),SLOT(start()),Qt::QueuedConnection);
+    connect(socket.data(),SIGNAL(readyRead()),SLOT(readFromServer()),Qt::QueuedConnection);
 }
 void RecvThread::run()
 {
-    while(socket->bytesAvailable()>0)
-    {
-        readFromServer();
-    }
+    exec();
 }
 void RecvThread::readFromServer()
 {
-    qCritical()<<"READ FROM";
-    QByteArray str;
-    str=socket->Read();
-    QString tmp=str;
-    qCritical()<<"STR"<<tmp;
-    Message* mes=new Message(tmp);
-    emit readyMessage(mes);
+    qCritical()<<"READ ";
+    QByteArray array=socket->readAll();
+    QString buffer = array;
+    qCritical()<<buffer;
+    if (!buffer.contains("#/"))
+    {
+        return;
+    }
+    QStringList strList=buffer.split("#/");
+    if (strList.isEmpty())
+        return;
+    QStringListIterator iter(strList);
+    while(iter.hasNext())
+    {
+        QString tmp=iter.next();
+        QSharedPointer<IMessage> mes(new Message(tmp));
+        emit readyMessage(mes);
+    }
 }

@@ -110,12 +110,16 @@ void ContactlistPage::stopPannigList()
 
 void ContactlistPage::displayMessage(QString userID, QString username)
 {
-    qDebug()<<">>>MainPage::displayMeesage(QString username)";
+    qCritical()<<">>>MainPage::displayMeesage(QString username)";
 
     QString dName = displayName(userID, username);
 
+    qCritical()<<"dName "<<dName<<"  ID  "<<userID<<"  username  "<<username;
     if (dName == readFrom)
+    {
+        qCritical()<<"VSE PLOHO";
         thumbnailListControl->RemoveUser(dName);
+    }
     else
     {
         if (scrolling)

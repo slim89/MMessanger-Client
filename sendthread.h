@@ -1,18 +1,17 @@
 #ifndef SENDTREAD_H
 #define SENDTREAD_H
 #include <QThread>
-#include <strings.h>
-class ClientSocket;
+#include <QtNetwork>
 class SendThread : public QThread
 {
     Q_OBJECT
 public:
-     ClientSocket*  mysock;
+     QSharedPointer<QTcpSocket>  mysock;
      QString mystr;
-     explicit SendThread(ClientSocket* sock);
-     void set(QString str);
+     explicit SendThread(QSharedPointer<QTcpSocket> sock);
+ public slots:
+     void writeToServer(QString str);
      void run();
-
 signals:
      void success();
      void fail();

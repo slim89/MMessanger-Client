@@ -8,6 +8,9 @@
 
 MainWindow::MainWindow():MApplicationWindow()
 {
+    QString IPaddr="127.0.0.1";
+    int port=3425;
+
     page1=new HomePage(this);
     page2 =new LoginPage(this);
     page3=new RegistrationPage(this);
@@ -15,10 +18,17 @@ MainWindow::MainWindow():MApplicationWindow()
     page5 =new InfoPage(this);
     page6 = new ContactlistPage();
     page7=new DialogPage(this);
-    sock= new ClientSocket();
-    sock->ConnectToHost();
+
+    sock=QSharedPointer<QTcpSocket>( new QTcpSocket());
+    sock->connectToHost(IPaddr,port);
+
     thread1=new SendThread(sock);
     thread2=new RecvThread(sock);
+    thread1->start();
+    thread2->start();
+
+
+
     page1->appear();
     //переходы со страницы home на все остальные
     QObject::connect(page1,SIGNAL(goLoginPage()),this,SLOT(GoLoginPage()));
@@ -28,22 +38,24 @@ MainWindow::MainWindow():MApplicationWindow()
     QObject::connect(page1,SIGNAL(goContactListPage()),this,SLOT(GoContactListPage()));
     QObject::connect(page2,SIGNAL(goHomePage()),this,SLOT(GoHomePage()));
     QObject::connect(page1,SIGNAL(goInfoPage()),page5,SLOT(appear()));
-    QObject::connect(page2,SIGNAL(readySend(QString)),this,SLOT(StartSendThread(QString)));
-    QObject::connect(page3,SIGNAL(readySend(QString)),this,SLOT(StartSendThread(QString)));
-    QObject::connect(page7,SIGNAL(readySend(QString)),this,SLOT(StartSendThread(QString)));
+    QObject::connect(page2,SIGNAL(readySend(QString)),thread1,SLOT(writeToServer(QString)));
+    QObject::connect(page3,SIGNAL(readySend(QString)),thread1,SLOT(writeToServer(QString)));
+    QObject::connect(page7,SIGNAL(readySend(QString)),thread1,SLOT(writeToServer(QString)));
     QObject::connect(page4,SIGNAL(changeSettings()),this,SLOT(ApplyNewSettings()));
-    QObject::connect(thread2,SIGNAL(readyMessage(Message*)),this,SLOT(ListenServer(Message*)));
+    QObject::connect(thread2,SIGNAL(readyMessage(QSharedPointer<IMessage>)),this,SLOT(ListenServer(QSharedPointer<IMessage>)));
     QObject::connect(page6,SIGNAL(goDialogPage(QString)),this,SLOT(GoDialogPage(QString)));
 
     //***Signal incomingMessage(QString) should be replaced real signal about incoming message for user.***
-    QObject::connect(this, SIGNAL(incomingMessage(QString, QString)),page6, SLOT(displayMessage(QString,QString)));
+    QObject::connect(this, SIGNAL(incomingMessage(QString,QString)),page6, SLOT(displayMessage(QString,QString)));
     //*****************************************************************************************************
+
+
 }
-void MainWindow::ListenServer(Message * mes)
+void MainWindow::ListenServer(QSharedPointer<IMessage> mes)
 {
     mes->Parse();
     if ("ser*ver"==mes->GetPart("s"))
-   {
+    {
         if ("good login-password"==mes->GetPart("m"))
         {
             MMessageBox* r=new MMessageBox("Title","Welcom",M::OkButton);
@@ -52,7 +64,11 @@ void MainWindow::ListenServer(Message * mes)
         }
 
         if ("good registration"==mes->GetPart("m"))
+        {
+            MMessageBox* r=new MMessageBox("Title","Your ID : "+mes->GetPart("id"),M::OkButton);
+            r->appear(this);
             page2->appear();
+        }
 
         if(mes->GetPart("m")=="login is already used")
         {
@@ -83,13 +99,13 @@ void MainWindow::ListenServer(Message * mes)
     {
         if ("connect"==mes->GetPart("o"))
         {
-            page6->Add(mes->GetPart("id"), mes->GetPart("s"),mes->GetPart("o"));
+            page6->Add(mes->GetPart("id"),mes->GetPart("s"),mes->GetPart("o"));
         }
         if ("disconnect"==mes->GetPart("o"))
         {
-            page6->Remove(mes->GetPart("s"));
+            page6->Remove(mes->GetPart("id"));
         }
-        if (""==mes->GetPart("o"))
+        if (mes->GetPart("o").isEmpty())
         {
             qCritical()<<">>sender"<<mes->GetPart("s");
             qCritical()<<">>message"<<mes->GetPart("m");
@@ -100,12 +116,12 @@ void MainWindow::ListenServer(Message * mes)
             else
             {
                 page7->Display(mes->GetPart("s"),mes->GetPart("m"));
-                emit incomingMessage(mes->GetPart("id"), mes->GetPart("s"));
+                emit incomingMessage(mes->GetPart("id"),mes->GetPart("s"));//!!!!!!!!!!!!!!!
             }
         }
     }
 
-    delete mes;
+    mes.clear();;
 }
 void MainWindow::GoContactListPage()
 {
@@ -123,12 +139,8 @@ void MainWindow::GoHomePage()
 }
 void MainWindow::ApplyNewSettings()
 {
-    sock->SetSettings(page4->GetIPAdrr(),page4->GetPort());
-}
-void MainWindow::StartSendThread(QString buf)
-{
-    thread1->set(buf);
-    thread1->start();
+    sock->disconnectFromHost();
+    sock->connectToHost(page4->GetIPAdrr(),page4->GetPort());
 }
 void MainWindow::GoLoginPage(){
 

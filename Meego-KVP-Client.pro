@@ -26,7 +26,6 @@ SOURCES += main.cpp \
     infopage.cpp \
     homepage.cpp \
     contactlistpage.cpp \
-    clientsocket.cpp \
     dialogpage.cpp \
     ThumbnailListControl.cpp
 
@@ -44,7 +43,6 @@ HEADERS += \
     homepage.h \
     contactlistpage.h \
     contact_data.h \
-    clientsocket.h \
     dialogpage.h \
     config.h \
     ThumbnailListControl.h
