@@ -46,7 +46,7 @@ MainWindow::MainWindow():MApplicationWindow()
     QObject::connect(page6,SIGNAL(goDialogPage(QString)),this,SLOT(GoDialogPage(QString)));
 
     //***Signal incomingMessage(QString) should be replaced real signal about incoming message for user.***
-    QObject::connect(this, SIGNAL(incomingMessage(QString,QString)),page6, SLOT(displayMessage(QString,QString)));
+    QObject::connect(this, SIGNAL(incomingMessage(QString)),page6, SLOT(displayMessage(QString)));
     //*****************************************************************************************************
 
 
@@ -107,16 +107,16 @@ void MainWindow::ListenServer(QSharedPointer<IMessage> mes)
         }
         if (mes->GetPart("o").isEmpty())
         {
-            qCritical()<<">>sender"<<mes->GetPart("s");
+            qCritical()<<">>sender"<<mes->GetPart("id");
             qCritical()<<">>message"<<mes->GetPart("m");
             if(this->currentPage()==page7)
             {
-                page7->Display(mes->GetPart("s"),mes->GetPart("m"));
+                page7->Display(mes->GetPart("id"),mes->GetPart("m"));
             }
             else
             {
-                page7->Display(mes->GetPart("s"),mes->GetPart("m"));
-                emit incomingMessage(mes->GetPart("id"),mes->GetPart("s"));//!!!!!!!!!!!!!!!
+                page7->Display(mes->GetPart("id"),mes->GetPart("m"));
+                emit incomingMessage(mes->GetPart("id"));//!!!!!!!!!!!!!!!
             }
         }
     }
