@@ -18,6 +18,8 @@ public:
     void Add(QString user_id, QString username, QString status);
     void Remove(QString user_id);
 
+    QString getUserDisplayNameByID(QString userID);
+
     //QList<QString> getUsernameList();
     //QString getStatusByName(QString username);
 
@@ -28,7 +30,7 @@ public:
 
     //QMap<QString, QString> findContactByStatus(QString username);
 public slots:
-    void displayMessage(QString, QString);
+    void displayMessage(QString);
 
 signals:
     void goDialogPage(QString username);

@@ -108,13 +108,14 @@ void ContactlistPage::stopPannigList()
     scrolling = 0;
 }
 
-void ContactlistPage::displayMessage(QString userID, QString username)
+void ContactlistPage::displayMessage(QString userID)
 {
     qCritical()<<">>>MainPage::displayMeesage(QString username)";
 
-    QString dName = displayName(userID, username);
+    QString dName = getUserDisplayNameByID(userID);
 
-    qCritical()<<"dName "<<dName<<"  ID  "<<userID<<"  username  "<<username;
+    qCritical()<<"dName "<<dName<<"  ID  "<<userID;
+
     if (dName == readFrom)
     {
         qCritical()<<"VSE PLOHO";
@@ -147,19 +148,7 @@ void ContactlistPage::Remove(QString userID)
 {
     qDebug()<<">>>ContactlistPage::Remove(QString userID) : userID = " << userID;
 
-    QString dName = "";
-    QString currID = "";
-
-    QMap<QString, QString>::const_iterator i = contactsList.constBegin();
-
-    while ((i != contactsList.constEnd()) && (currID != userID)) {
-        dName = i.key();
-        QStringList list1 = dName.split("( ");
-        QString id_part = list1[1];
-        QStringList list2 = id_part.split(" )");
-        currID = list2[0];
-        ++i;
-    }
+    QString dName = getUserDisplayNameByID(userID);
 
     contactsList.remove(dName);
 
@@ -204,4 +193,24 @@ QString ContactlistPage::displayName(QString userID, QString username)
 {
 
     return username + " ( " + userID + " )";
+}
+
+QString ContactlistPage::getUserDisplayNameByID(QString userID)
+{
+    QString currID = "";
+
+    QMap<QString, QString>::const_iterator i = contactsList.constBegin();
+
+    while ( i != contactsList.constEnd() ) {
+        QString dName = i.key();
+        QStringList list1 = dName.split("( ");
+        QString id_part = list1[1];
+        QStringList list2 = id_part.split(" )");
+        currID = list2[0];
+        if (currID == userID)
+            return dName;
+        ++i;
+    }
+
+    return "";
 }
