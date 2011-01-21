@@ -41,7 +41,7 @@ public slots:
     void GoDialogPage(QString);
 
 signals:
-    void incomingMessage(QString,QString);
+    void incomingMessage(QString);
 
 };
 
